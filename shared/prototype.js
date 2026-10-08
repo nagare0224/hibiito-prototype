@@ -1,20 +1,11 @@
 (() => {
   const root=document.documentElement;
-  const directionBtn=document.querySelector('[data-action="direction"]');
   const stateBtn=document.querySelector('[data-action="state"]');
   const copyBtn=document.querySelector('[data-action="copy"]');
   const statePanel=document.getElementById('state-panel');
   const mainSections=[...document.querySelectorAll('.sleep-hero,.section-block,.metrics-grid,.insight')];
   const copy=document.getElementById('insight-copy');
-  let direction=0, state=0, longCopy=false;
-  const directions=[['a','A · 月の水面'],['b','B · 夜の窓'],['c','C · 眠りの帯']];
-
-  directionBtn.addEventListener('click',()=>{
-    direction=(direction+1)%directions.length;
-    root.dataset.direction=directions[direction][0];
-    directionBtn.textContent=directions[direction][1];
-    requestAnimationFrame(checkOverflow);
-  });
+  let state=0, longCopy=false;
 
   document.querySelector('[data-action="theme"]').addEventListener('click',()=>{
     root.dataset.theme=root.dataset.theme==='night'?'day':'night';
