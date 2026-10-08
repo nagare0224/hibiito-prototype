@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#dff3f5"/><stop offset=".58" stop-color="#f4f3e8"/><stop offset="1" stop-color="#cfe9e2"/>
+  </linearGradient>
+  <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#cde8e7"/><stop offset="1" stop-color="#9fcfcb"/>
+  </linearGradient>
+  <radialGradient id="glow">
+    <stop offset="0" stop-color="#fff8d6" stop-opacity=".95"/><stop offset="1" stop-color="#fff8d6" stop-opacity="0"/>
+  </radialGradient>
+  <filter id="blur"><feGaussianBlur stdDeviation="15"/></filter>
+</defs>
+<rect width="1024" height="1024" fill="url(#sky)"/>
+<circle cx="790" cy="180" r="120" fill="url(#glow)"/>
+<circle cx="790" cy="180" r="54" fill="#fff5c7" opacity=".52"/>
+<g fill="#ffffff" opacity=".52" filter="url(#blur)">
+  <ellipse cx="260" cy="430" rx="185" ry="72"/><ellipse cx="720" cy="470" rx="210" ry="85"/>
+</g>
+<path d="M0 645 Q160 575 300 635 T585 628 T1024 620 V1024 H0Z" fill="#c4dfdd" opacity=".78"/>
+<path d="M0 708 Q190 650 360 700 T720 690 T1024 700 V1024 H0Z" fill="url(#water)"/>
+<g fill="none" stroke="#fffdf0" stroke-width="10" stroke-linecap="round" opacity=".34">
+  <path d="M170 785 Q380 750 610 790"/><path d="M340 850 Q570 810 855 850"/><path d="M610 910 Q760 885 930 905"/>
+</g>
+<g fill="#7abf88" opacity=".72">
+  <ellipse cx="116" cy="690" rx="33" ry="76" transform="rotate(-38 116 690)"/>
+  <ellipse cx="176" cy="745" rx="28" ry="66" transform="rotate(36 176 745)"/>
+  <ellipse cx="855" cy="700" rx="34" ry="78" transform="rotate(34 855 700)"/>
+  <ellipse cx="920" cy="770" rx="26" ry="60" transform="rotate(-32 920 770)"/>
+</g>
+<g fill="#fffef5" opacity=".86">
+  <circle cx="162" cy="655" r="13"/><circle cx="150" cy="670" r="13"/><circle cx="175" cy="670" r="13"/>
+  <circle cx="874" cy="665" r="12"/><circle cx="862" cy="678" r="12"/><circle cx="886" cy="678" r="12"/>
+</g>
+</svg>
