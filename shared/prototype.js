@@ -1,11 +1,20 @@
 (() => {
   const root=document.documentElement;
+  const directionBtn=document.querySelector('[data-action="direction"]');
   const stateBtn=document.querySelector('[data-action="state"]');
   const copyBtn=document.querySelector('[data-action="copy"]');
   const statePanel=document.getElementById('state-panel');
   const mainSections=[...document.querySelectorAll('.sleep-hero,.section-block,.metrics-grid,.insight')];
   const copy=document.getElementById('insight-copy');
-  let state=0, longCopy=false;
+  let direction=0, state=0, longCopy=false;
+  const directions=[['a','A · 月の水面'],['b','B · 夜の窓'],['c','C · 眠りの帯']];
+
+  directionBtn.addEventListener('click',()=>{
+    direction=(direction+1)%directions.length;
+    root.dataset.direction=directions[direction][0];
+    directionBtn.textContent=directions[direction][1];
+    requestAnimationFrame(checkOverflow);
+  });
 
   document.querySelector('[data-action="theme"]').addEventListener('click',()=>{
     root.dataset.theme=root.dataset.theme==='night'?'day':'night';
@@ -43,15 +52,20 @@
 
   function checkOverflow(){
     let count=0;
-    document.querySelectorAll('[data-overflow-watch],[data-overflow-probe]').forEach(el=>{
+    document.querySelectorAll('[data-fit-probe]').forEach(el=>{
       delete el.dataset.overflow;
-    });
-    document.querySelectorAll('[data-overflow-probe]').forEach(el=>{
-      const bad=el.scrollWidth>el.clientWidth+1 || el.scrollHeight>el.clientHeight+1;
+      const rect=el.getBoundingClientRect();
+      const children=[...el.children];
+      const childOverflow=children.some(child=>{
+        const r=child.getBoundingClientRect();
+        return r.left < rect.left-3 || r.right > rect.right+3 || r.top < rect.top-3 || r.bottom > rect.bottom+3;
+      });
+      const selfOverflow=el.scrollWidth-el.clientWidth>4 || el.scrollHeight-el.clientHeight>4;
+      const bad=childOverflow || selfOverflow;
       el.dataset.overflow=bad?'true':'false';
       if(bad) count++;
     });
-    document.getElementById('overflow-readout').textContent='text/layout overflow: '+(count?count+' detected':'none');
+    document.getElementById('overflow-readout').textContent='fit checks: '+(count?count+' issue'+(count>1?'s':''):'pass');
     document.getElementById('viewport-readout').textContent='viewport: '+window.innerWidth+'×'+window.innerHeight+' css px';
   }
   window.addEventListener('resize',checkOverflow);
