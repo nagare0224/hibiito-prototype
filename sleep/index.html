@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja" data-theme="day">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>HIBIITO Sleep Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/prototype.css" />
+</head>
+<body>
+  <div class="toolbar" aria-label="prototype controls">
+    <button data-action="theme">Day / Night</button>
+    <button data-action="state">Normal</button>
+    <button data-action="copy">Long copy</button>
+  </div>
+
+  <main class="phone-shell">
+    <section class="screen" id="sleep-screen">
+      <header class="date-row">
+        <button aria-label="前日">‹</button>
+        <div>
+          <div class="date-main">10月8日 木曜日</div>
+          <div class="date-sub">昨夜の睡眠</div>
+        </div>
+        <button aria-label="翌日">›</button>
+      </header>
+
+      <section class="sleep-hero" data-overflow-watch>
+        <div class="art-layer art-moon" aria-hidden="true"></div>
+        <div class="art-layer art-clouds" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <p class="hero-eyebrow">睡眠</p>
+          <div class="hero-value"><span>6</span><small>時間</small><span>42</span><small>分</small></div>
+          <p class="hero-support">最近のあなたより 18分短め</p>
+        </div>
+        <div class="asset-placeholder" aria-label="画像確認枠">
+          <span>IMAGE SLOT</span>
+          <small>public可否承認後に実assetを埋め込み</small>
+        </div>
+      </section>
+
+      <section class="section-block" data-overflow-watch>
+        <div class="section-title-row"><h2>睡眠の流れ</h2><span>23:48 → 06:30</span></div>
+        <div class="sleep-stage">
+          <div class="stage deep" style="width:20%"></div>
+          <div class="stage light" style="width:39%"></div>
+          <div class="stage rem" style="width:19%"></div>
+          <div class="stage awake" style="width:8%"></div>
+          <div class="stage light" style="width:14%"></div>
+        </div>
+        <div class="stage-labels"><span>深い</span><span>浅い</span><span>REM</span><span>覚醒</span></div>
+      </section>
+
+      <section class="metrics-grid">
+        <article><span>就寝</span><strong>23:48</strong></article>
+        <article><span>起床</span><strong>06:30</strong></article>
+        <article><span>深い睡眠</span><strong>1時間21分</strong></article>
+        <article><span>REM</span><strong>1時間16分</strong></article>
+      </section>
+
+      <section class="insight" data-overflow-watch>
+        <div class="sprout" aria-hidden="true">✦</div>
+        <div>
+          <h2>ひとこと</h2>
+          <p id="insight-copy">いつもより少し短めの睡眠でした。今日は無理を決めつけず、体調も一緒に見てみましょう。</p>
+        </div>
+      </section>
+
+      <section class="state-panel" id="state-panel" hidden>
+        <strong id="state-title">データなし</strong>
+        <p id="state-message">昨夜の睡眠データは見つかりませんでした。0時間としては扱いません。</p>
+      </section>
+    </section>
+  </main>
+
+  <aside class="debug-panel">
+    <strong>Prototype checks</strong>
+    <span id="viewport-readout"></span>
+    <span id="overflow-readout">overflow: checking…</span>
+    <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
+    <span>dummy data only</span>
+  </aside>
+
+  <script src="../shared/prototype.js"></script>
+</body>
+</html>
