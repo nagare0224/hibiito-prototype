@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja" data-theme="day">
+<html lang="ja" data-theme="day" data-direction="a">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
@@ -7,10 +7,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/prototype.css?v=20261008-1855" />
+  <link rel="stylesheet" href="../shared/prototype.css?v=20261008-1945" />
 </head>
 <body>
   <div class="toolbar" aria-label="prototype controls">
+    <button data-action="direction">A · 月の水面</button>
     <button data-action="theme">Day / Night</button>
     <button data-action="state">Normal</button>
     <button data-action="copy">Long copy</button>
@@ -27,13 +28,15 @@
         <button aria-label="翌日">›</button>
       </header>
 
-      <section class="sleep-hero" data-overflow-watch>
+      <section class="sleep-hero">
         <div class="art-layer art-moon" aria-hidden="true"></div>
         <div class="art-layer art-clouds" aria-hidden="true"></div>
-        <div class="hero-copy" data-overflow-probe>
+        <div class="art-layer art-stars" aria-hidden="true"></div>
+        <div class="art-layer art-window" aria-hidden="true"></div>
+        <div class="hero-copy">
           <p class="hero-eyebrow">睡眠</p>
-          <div class="hero-value" data-overflow-probe><span>6</span><small>時間</small><span>42</span><small>分</small></div>
-          <p class="hero-support" data-overflow-probe>最近のあなたより 18分短め</p>
+          <div class="hero-value" data-fit-probe><span>6</span><small>時間</small><span>42</span><small>分</small></div>
+          <p class="hero-support" data-fit-probe>最近のあなたより 18分短め</p>
         </div>
         <div class="asset-placeholder" aria-label="画像確認枠">
           <span>IMAGE SLOT</span>
@@ -42,7 +45,7 @@
       </section>
 
       <section class="section-block" data-overflow-watch>
-        <div class="section-title-row" data-overflow-probe><h2>睡眠の流れ</h2><span>23:48 → 06:30</span></div>
+        <div class="section-title-row" data-fit-probe><h2>睡眠の流れ</h2><span>23:48 → 06:30</span></div>
         <div class="sleep-stage">
           <div class="stage deep" style="width:20%"></div>
           <div class="stage light" style="width:39%"></div>
@@ -62,7 +65,7 @@
 
       <section class="insight">
         <div class="sprout" aria-hidden="true">✦</div>
-        <div data-overflow-probe>
+        <div data-fit-probe>
           <h2>ひとこと</h2>
           <p id="insight-copy">いつもより少し短めの睡眠でした。今日は無理を決めつけず、体調も一緒に見てみましょう。</p>
         </div>
@@ -78,12 +81,12 @@
   <aside class="debug-panel">
     <strong>Prototype checks</strong>
     <span id="viewport-readout"></span>
-    <span id="overflow-readout">text/layout overflow: checking…</span>
+    <span id="overflow-readout">fit checks: checking…</span>
     <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
     <span>dummy data only</span>
-    <span id="prototype-version">version: 2026-10-08 18:55</span>
+    <span id="prototype-version">version: 2026-10-08 19:45</span>
   </aside>
 
-  <script src="../shared/prototype.js?v=20261008-1855"></script>
+  <script src="../shared/prototype.js?v=20261008-1945"></script>
 </body>
 </html>
