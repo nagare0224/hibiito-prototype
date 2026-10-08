@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja" data-theme="day" data-direction="a">
+<html lang="ja" data-theme="day">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
@@ -7,11 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/prototype.css?v=20261008-1945" />
+  <link rel="stylesheet" href="../shared/prototype.css?v=20261009-0745" />
 </head>
 <body>
   <div class="toolbar" aria-label="prototype controls">
-    <button data-action="direction">A · 月の水面</button>
     <button data-action="theme">Day / Night</button>
     <button data-action="state">Normal</button>
     <button data-action="copy">Long copy</button>
@@ -29,18 +28,12 @@
       </header>
 
       <section class="sleep-hero">
-        <div class="art-layer art-moon" aria-hidden="true"></div>
-        <div class="art-layer art-clouds" aria-hidden="true"></div>
-        <div class="art-layer art-stars" aria-hidden="true"></div>
-        <div class="art-layer art-window" aria-hidden="true"></div>
-        <div class="hero-copy">
+        <img class="hero-art hero-art-day" src="../assets/sleep-hero-day.svg?v=20261009-0745" alt="" aria-hidden="true">
+        <img class="hero-art hero-art-night" src="../assets/sleep-hero-night.svg?v=20261009-0745" alt="" aria-hidden="true">
+                <div class="hero-copy">
           <p class="hero-eyebrow">睡眠</p>
           <div class="hero-value" data-fit-probe><span>6</span><small>時間</small><span>42</span><small>分</small></div>
           <p class="hero-support" data-fit-probe>最近のあなたより 18分短め</p>
-        </div>
-        <div class="asset-placeholder" aria-label="画像確認枠">
-          <span>IMAGE SLOT</span>
-          <small>public可否承認後に実assetを埋め込み</small>
         </div>
       </section>
 
@@ -84,9 +77,9 @@
     <span id="overflow-readout">fit checks: checking…</span>
     <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
     <span>dummy data only</span>
-    <span id="prototype-version">version: 2026-10-08 19:45</span>
+    <span id="prototype-version">version: 2026-10-09 07:45</span>
   </aside>
 
-  <script src="../shared/prototype.js?v=20261008-1945"></script>
+  <script src="../shared/prototype.js?v=20261009-0745"></script>
 </body>
 </html>
