@@ -32,6 +32,6 @@ html[data-theme="day"] .art-moon{width:42px;height:42px;opacity:.38;right:26px;t
 .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.metrics-grid article{padding:9px 11px;display:grid;gap:2px}.metrics-grid span{font-size:9px;color:var(--muted)}.metrics-grid strong{font-size:13px}
 .insight{display:grid;grid-template-columns:42px 1fr;gap:8px;padding:10px 12px;align-items:center}.sprout{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--accent2) 65%,transparent)}.insight h2{font-size:13px}.insight p{font-size:10px;line-height:1.5;margin:3px 0 0}
 .state-panel{padding:16px;text-align:center}.state-panel p{font-size:11px;color:var(--muted)}
-.debug-panel{position:fixed;right:8px;bottom:8px;z-index:30;display:flex;flex-direction:column;gap:2px;padding:8px 10px;border-radius:12px;background:rgba(0,0,0,.72);color:white;font:10px/1.25 system-ui;max-width:220px}
+.debug-panel{position:static;width:min(calc(100% - 24px),406px);margin:0 auto 24px;display:flex;flex-direction:column;gap:3px;padding:9px 11px;border-radius:12px;background:rgba(0,0,0,.78);color:white;font:10px/1.3 system-ui}
 [data-overflow="true"]{outline:2px solid #ff4d4f!important;outline-offset:2px}
 @media (min-width:700px){.phone-shell{padding-top:24px}.screen{border:1px solid var(--line);border-radius:28px;padding:14px;min-height:820px}.toolbar{justify-content:center}}
