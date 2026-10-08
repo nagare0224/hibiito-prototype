@@ -43,12 +43,15 @@
 
   function checkOverflow(){
     let count=0;
-    document.querySelectorAll('[data-overflow-watch]').forEach(el=>{
+    document.querySelectorAll('[data-overflow-watch],[data-overflow-probe]').forEach(el=>{
+      delete el.dataset.overflow;
+    });
+    document.querySelectorAll('[data-overflow-probe]').forEach(el=>{
       const bad=el.scrollWidth>el.clientWidth+1 || el.scrollHeight>el.clientHeight+1;
       el.dataset.overflow=bad?'true':'false';
       if(bad) count++;
     });
-    document.getElementById('overflow-readout').textContent='overflow: '+(count?count+' detected':'none');
+    document.getElementById('overflow-readout').textContent='text/layout overflow: '+(count?count+' detected':'none');
     document.getElementById('viewport-readout').textContent='viewport: '+window.innerWidth+'×'+window.innerHeight+' css px';
   }
   window.addEventListener('resize',checkOverflow);
