@@ -46,3 +46,61 @@ body::before{width:220px;height:220px;left:-100px;top:42%;background:radial-grad
 body::after{width:260px;height:260px;right:-150px;bottom:4%;background:radial-gradient(circle,color-mix(in srgb,var(--accent2) 75%,var(--glow)),transparent 72%)}
 html[data-theme="night"] body::before,html[data-theme="night"] body::after{opacity:.18}
 .debug-panel{opacity:.62}
+
+/* Sleep A / Hero typography contract — prototype only; not Android dp/sp */
+[hidden]{display:none!important}
+.sleep-hero .hero-copy{
+  position:relative;
+  z-index:2;
+  width:calc(100% - 40px);
+  max-width:none;
+  padding:7px 2px 8px;
+  transform:translateY(-8px);
+  text-align:center;
+  isolation:isolate;
+}
+.sleep-hero .hero-copy::before{
+  content:"";position:absolute;inset:-13px -4px;z-index:-1;
+  border-radius:999px;pointer-events:none;
+  background:radial-gradient(ellipse at center,rgba(248,251,246,.38) 0%,rgba(248,251,246,.16) 55%,transparent 80%);
+}
+html[data-theme="night"] .sleep-hero .hero-copy::before{
+  background:radial-gradient(ellipse at center,rgba(16,38,57,.39) 0%,rgba(16,38,57,.17) 56%,transparent 82%);
+}
+.sleep-hero .hero-eyebrow{
+  font-family:"Kiwi Maru",sans-serif;
+  font-size:13px;font-weight:500;line-height:1.4;margin:0 0 6px;
+}
+.sleep-hero .hero-value{
+  display:flex;align-items:baseline;justify-content:center;
+  column-gap:clamp(6px,2.4vw,12px);
+  width:100%;min-width:0;line-height:1.2;white-space:nowrap;
+}
+.sleep-hero .hero-time{
+  display:inline-flex;align-items:baseline;justify-content:center;
+  flex:0 0 auto;gap:2px;white-space:nowrap;
+}
+.sleep-hero .hero-number{
+  font-family:"Kiwi Maru",sans-serif;
+  font-weight:500;font-size:clamp(40px,11vw,46px);
+  line-height:1.18;letter-spacing:-1.2px;
+  font-variant-numeric:lining-nums tabular-nums;
+}
+.sleep-hero .hero-unit{
+  font-family:"Zen Maru Gothic",sans-serif;
+  font-size:11px;font-weight:700;line-height:1.25;
+  position:relative;bottom:1px;
+}
+.sleep-hero .hero-support{
+  font-family:"Zen Maru Gothic",sans-serif;
+  font-size:10px;line-height:1.5;font-weight:700;
+  margin:8px 0 0;white-space:normal;
+}
+html[data-theme="night"] .sleep-hero .hero-copy{
+  text-shadow:0 1px 2px rgba(7,24,41,.48);
+}
+@media(max-width:340px){
+  .sleep-hero .hero-copy{width:calc(100% - 30px)}
+  .sleep-hero .hero-number{font-size:39px}
+  .sleep-hero .hero-unit{font-size:10px}
+}
