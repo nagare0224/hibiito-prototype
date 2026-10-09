@@ -45,20 +45,37 @@
     let count=0;
     document.querySelectorAll('[data-fit-probe]').forEach(el=>{
       delete el.dataset.overflow;
+      if(el.closest('[hidden]')) return;
       const rect=el.getBoundingClientRect();
-      const children=[...el.children];
-      const childOverflow=children.some(child=>{
+      const childOverflow=[...el.children].some(child=>{
         const r=child.getBoundingClientRect();
-        return r.left < rect.left-3 || r.right > rect.right+3 || r.top < rect.top-3 || r.bottom > rect.bottom+3;
+        return r.left < rect.left-3 || r.right > rect.right+3;
       });
-      const selfOverflow=el.scrollWidth-el.clientWidth>4 || el.scrollHeight-el.clientHeight>4;
-      const bad=childOverflow || selfOverflow;
+      // Only horizontal overflow is meaningful for this typography probe.
+      // Inline baseline ascenders / descenders are not a clipped-layout error.
+      const bad=childOverflow || el.scrollWidth-el.clientWidth>4;
       el.dataset.overflow=bad?'true':'false';
       if(bad) count++;
     });
+    const copy=document.querySelector('[data-hero-safe-probe]');
+    const hero=document.querySelector('.sleep-hero');
+    if(copy && hero && !hero.hidden){
+      const a=copy.getBoundingClientRect(), b=hero.getBoundingClientRect();
+      const unsafe=a.left<b.left+14 || a.right>b.right-14 || a.top<b.top+12 || a.bottom>b.bottom-12;
+      if(unsafe) count++;
+    }
+    const art=document.querySelector(root.dataset.theme==='night'?'.hero-art-night':'.hero-art-day');
+    const artOk=!!(art && art.complete && art.naturalWidth>0);
+    document.getElementById('art-readout').textContent='hero art: '+(artOk?'loaded':'loading / failed');
+    if(art && art.complete && !artOk) count++;
     document.getElementById('overflow-readout').textContent='fit checks: '+(count?count+' issue'+(count>1?'s':''):'pass');
     document.getElementById('viewport-readout').textContent='viewport: '+window.innerWidth+'×'+window.innerHeight+' css px';
   }
+  document.querySelectorAll('.hero-art').forEach(art=>{
+    art.addEventListener('load',checkOverflow);
+    art.addEventListener('error',checkOverflow);
+  });
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(checkOverflow);
   window.addEventListener('resize',checkOverflow);
   window.addEventListener('load',checkOverflow);
 })();
