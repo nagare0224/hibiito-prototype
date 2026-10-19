@@ -20,6 +20,8 @@
 <g fill="#c9d8e1" opacity=".18">
   <ellipse cx="250" cy="455" rx="180" ry="64"/><ellipse cx="710" cy="470" rx="210" ry="78"/>
 </g>
+<g opacity=".24"><path d="M0 645 Q138 605 244 650 Q350 601 468 637 Q570 612 700 640 Q853 612 1024 647 V720 H0Z" fill="#54718a"/><path d="M0 681 Q170 642 308 682 Q473 650 621 674 Q789 644 1024 682 V719 H0Z" fill="#386879"/></g>
+<g fill="#bed9e1" opacity=".09"><ellipse cx="175" cy="544" rx="120" ry="39"/><ellipse cx="820" cy="553" rx="125" ry="38"/></g>
 <path d="M0 645 Q150 585 300 635 T590 630 T1024 620 V1024 H0Z" fill="#21495c" opacity=".88"/>
 <path d="M0 708 Q190 660 370 700 T720 690 T1024 700 V1024 H0Z" fill="url(#water)"/>
 <g fill="none" stroke="#f8efc2" stroke-width="9" stroke-linecap="round" opacity=".24">
