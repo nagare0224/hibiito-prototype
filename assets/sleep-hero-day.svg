@@ -17,6 +17,8 @@
 <g fill="#ffffff" opacity=".52" filter="url(#blur)">
   <ellipse cx="260" cy="430" rx="185" ry="72"/><ellipse cx="720" cy="470" rx="210" ry="85"/>
 </g>
+<g opacity=".34"><path d="M0 640 Q160 595 252 640 Q340 603 433 636 Q570 590 695 628 Q870 600 1024 640 V710 H0Z" fill="#9ec8c9"/><path d="M0 667 Q178 628 305 664 Q470 626 589 660 Q744 630 866 655 Q956 633 1024 660 V710 H0Z" fill="#d5e7da"/></g>
+<g opacity=".23" fill="#fffef5"><ellipse cx="164" cy="540" rx="100" ry="32"/><ellipse cx="800" cy="545" rx="120" ry="35"/></g>
 <path d="M0 645 Q160 575 300 635 T585 628 T1024 620 V1024 H0Z" fill="#c4dfdd" opacity=".78"/>
 <path d="M0 708 Q190 650 360 700 T720 690 T1024 700 V1024 H0Z" fill="url(#water)"/>
 <g fill="none" stroke="#fffdf0" stroke-width="10" stroke-linecap="round" opacity=".34">
