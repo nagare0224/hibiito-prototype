@@ -55,17 +55,49 @@
   };
   const backdrop=document.getElementById('compare-backdrop');
   const sheet=document.getElementById('compare-sheet');
-  const closeButton=document.getElementById('compare-close');
+  const dragHandle=document.getElementById('compare-handle');
   let compareReturnFocus=null;
-  const closeComparison=()=>{
-    if(sheet.hidden)return;
-    backdrop.hidden=true;sheet.hidden=true;document.body.classList.remove('sheet-open');
-    if(compareReturnFocus&&document.contains(compareReturnFocus))compareReturnFocus.focus();
+  let closeTimer=null;
+  let closing=false;
+  let drag=null;
+  let suppressHandleClick=false;
+  let suppressResetTimer=null;
+
+  const finishClose=()=>{
+    clearTimeout(closeTimer);
+    closeTimer=null;
+    backdrop.hidden=true;
+    sheet.hidden=true;
+    sheet.classList.remove('is-dragging','is-dismissing');
+    sheet.style.removeProperty('--sheet-offset');
+    backdrop.style.opacity='';
+    document.body.classList.remove('sheet-open');
+    closing=false;
+    drag=null;
+    if(compareReturnFocus && document.contains(compareReturnFocus) && !compareReturnFocus.closest('[hidden]')){
+      compareReturnFocus.focus();
+    }else{
+      stateBtn.focus();
+    }
     compareReturnFocus=null;
   };
+
+  const closeComparison=(immediate=false)=>{
+    if(sheet.hidden || closing)return;
+    if(immediate){finishClose();return;}
+    closing=true;
+    drag=null;
+    sheet.classList.remove('is-dragging');
+    sheet.classList.add('is-dismissing');
+    sheet.style.removeProperty('--sheet-offset');
+    backdrop.style.opacity='0';
+    const reduceMotion=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    closeTimer=setTimeout(finishClose,reduceMotion?0:270);
+  };
+
   const openComparison=(key,trigger)=>{
     const data=compareData[key];
-    if(!data||state!==0)return;
+    if(!data || state!==0 || closing)return;
     compareReturnFocus=trigger;
     document.getElementById('compare-title').textContent=data.label;
     document.getElementById('compare-current').textContent=data.current;
@@ -76,24 +108,68 @@
     const fraction=(data.value-data.min)/(data.max-data.min);
     const marker=20+60*fraction;
     document.getElementById('compare-marker').style.left=Math.min(95,Math.max(5,marker))+'%';
-    sheet.hidden=false;backdrop.hidden=false;document.body.classList.add('sheet-open');
-    closeButton.focus();
+    sheet.classList.remove('is-dragging','is-dismissing');
+    sheet.style.removeProperty('--sheet-offset');
+    backdrop.style.opacity='';
+    sheet.hidden=false;
+    backdrop.hidden=false;
+    document.body.classList.add('sheet-open');
+    dragHandle.focus();
   };
+
+  // Pointer Events keep the bottom sheet exactly under the finger, including
+  // dragging back upward; only a down swipe above the threshold dismisses it.
+  dragHandle.addEventListener('pointerdown',event=>{
+    if(sheet.hidden || closing || drag || (event.pointerType==='mouse' && event.button!==0))return;
+    drag={pointerId:event.pointerId,startY:event.clientY,startAt:performance.now(),delta:0};
+    sheet.classList.add('is-dragging');
+    dragHandle.setPointerCapture(event.pointerId);
+  });
+  dragHandle.addEventListener('pointermove',event=>{
+    if(!drag || event.pointerId!==drag.pointerId || closing)return;
+    const distance=Math.max(0,event.clientY-drag.startY);
+    drag.delta=distance;
+    sheet.style.setProperty('--sheet-offset',Math.min(distance,sheet.offsetHeight+20)+'px');
+    backdrop.style.opacity=String(Math.max(0.15,1-distance/Math.max(200,sheet.offsetHeight)));
+  });
+  const finishDrag=(event,cancelled=false)=>{
+    if(!drag || event.pointerId!==drag.pointerId)return;
+    const duration=Math.max(1,performance.now()-drag.startAt);
+    const distance=Math.max(0,event.clientY-drag.startY);
+    const dismiss=!cancelled && (distance>=Math.min(120,sheet.offsetHeight*0.26) || (distance>=48 && distance/duration>=0.65));
+    // Prevent a synthetic click immediately after pointerup from closing a snap-back.
+    if(distance>=8){
+      suppressHandleClick=true;
+      clearTimeout(suppressResetTimer);
+      suppressResetTimer=setTimeout(()=>{suppressHandleClick=false;},400);
+    }
+    drag=null;
+    sheet.classList.remove('is-dragging');
+    if(dismiss)closeComparison();
+    else{
+      sheet.style.removeProperty('--sheet-offset');
+      backdrop.style.opacity='';
+    }
+  };
+  dragHandle.addEventListener('pointerup',event=>finishDrag(event));
+  dragHandle.addEventListener('pointercancel',event=>finishDrag(event,true));
+  dragHandle.addEventListener('lostpointercapture',event=>finishDrag(event,true));
+  dragHandle.addEventListener('click',()=>{
+    if(suppressHandleClick){suppressHandleClick=false;return;}
+    closeComparison();
+  });
+
   document.querySelectorAll('[data-compare]').forEach(el=>{
     el.addEventListener('click',()=>openComparison(el.dataset.compare,el));
   });
-  closeButton.addEventListener('click',closeComparison);
-  backdrop.addEventListener('click',closeComparison);
+  backdrop.addEventListener('click',()=>closeComparison());
   document.addEventListener('keydown',event=>{
-    if(sheet.hidden)return;
+    if(sheet.hidden || closing)return;
     if(event.key==='Escape'){event.preventDefault();closeComparison();}
     if(event.key==='Tab'){
-      const focusable=[...sheet.querySelectorAll('button:not([disabled])')];
-      if(focusable.length){
-        const first=focusable[0], last=focusable[focusable.length-1];
-        if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
-        else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
-      }
+      // The grabber doubles as an accessible close control.
+      if(!event.shiftKey){event.preventDefault();dragHandle.focus();}
+      else{event.preventDefault();dragHandle.focus();}
     }
   });
 
