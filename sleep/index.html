@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/prototype.css?v=20261009-hero-fit2" />
+  <link rel="stylesheet" href="../shared/prototype.css?v=20261020-graph-abc" />
 </head>
 <body>
   <div class="toolbar" aria-label="prototype controls">
@@ -28,8 +28,8 @@
       </header>
 
       <section class="sleep-hero">
-        <img class="hero-art hero-art-day" src="../assets/sleep-hero-day.svg?v=20261009-hero-fit2" alt="" aria-hidden="true">
-        <img class="hero-art hero-art-night" src="../assets/sleep-hero-night.svg?v=20261009-hero-fit2" alt="" aria-hidden="true">
+        <img class="hero-art hero-art-day" src="../assets/sleep-hero-day.svg?v=20261020-graph-abc" alt="" aria-hidden="true">
+        <img class="hero-art hero-art-night" src="../assets/sleep-hero-night.svg?v=20261020-graph-abc" alt="" aria-hidden="true">
         <div class="hero-copy" data-hero-safe-probe>
           <p class="hero-eyebrow">睡眠</p>
           <div class="hero-value" data-fit-probe aria-label="6時間42分">
@@ -40,21 +40,47 @@
         </div>
       </section>
 
-      <section class="section-block" data-overflow-watch>
-        <div class="section-title-row" data-fit-probe><h2>睡眠の流れ</h2><span>23:48 → 06:30</span></div>
-        <div class="sleep-stage">
-          <div class="stage deep" style="width:20%"></div>
-          <div class="stage light" style="width:39%"></div>
-          <div class="stage rem" style="width:19%"></div>
-          <div class="stage awake" style="width:8%"></div>
-          <div class="stage light" style="width:14%"></div>
+
+      <section class="section-block sleep-graph">
+        <div class="section-title-row" data-fit-probe><h2>睡眠の流れ</h2><span>23:48 → 07:12</span></div>
+        <div class="graph-quick-facts"><span>睡眠 <strong>6時間42分</strong></span><span>在床 7時間24分</span><span>覚醒 42分</span></div>
+        <div class="graph-switcher" role="group" aria-label="睡眠グラフ表示方法">
+          <button type="button" data-graph-variant="a" aria-pressed="true">A · 推移</button>
+          <button type="button" data-graph-variant="b" aria-pressed="false">B · 内訳</button>
+          <button type="button" data-graph-variant="c" aria-pressed="false">C · 両方</button>
         </div>
-        <div class="stage-labels"><span>深い</span><span>浅い</span><span>REM</span><span>覚醒</span></div>
+        <div class="graph-variant" id="graph-a">
+          <p class="graph-explain">どの時間帯に、どの眠りだったかを見られます。</p>
+          <div class="sleep-timeline">
+            <div class="timeline-lanes" aria-hidden="true"><span>覚醒</span><span>REM</span><span>浅い</span><span>深い</span></div>
+            <div class="timeline-visual" id="timeline-a" aria-label="各睡眠段階の時間推移"></div>
+          </div>
+          <div class="time-axis"><span>23:48</span><span>02:00</span><span>04:00</span><span>07:12</span></div>
+          <p class="graph-selection" id="timeline-a-selected" aria-live="polite">色の帯をタップすると、その時刻の眠りが分かります。</p>
+          <div class="stage-key"><span><i class="key-deep"></i>深い</span><span><i class="key-light"></i>浅い</span><span><i class="key-rem"></i>REM</span><span><i class="key-awake"></i>覚醒</span></div>
+        </div>
+        <div class="graph-variant" id="graph-b" hidden>
+          <p class="graph-explain">各段階の合計時間と割合を見比べられます。</p>
+          <div class="distribution-bar" id="distribution-bar" role="img" aria-label="在床時間の段階別割合"></div>
+          <div class="stage-totals" id="stage-totals"></div>
+          <p class="graph-note">割合の分母は在床時間（7時間24分）です。</p>
+        </div>
+        <div class="graph-variant" id="graph-c" hidden>
+          <p class="graph-explain">時間の流れと各段階の合計、仮の比較目安を一緒に。</p>
+          <div class="sleep-timeline timeline-compact">
+            <div class="timeline-lanes" aria-hidden="true"><span>覚醒</span><span>REM</span><span>浅い</span><span>深い</span></div>
+            <div class="timeline-visual" id="timeline-c" aria-label="各睡眠段階の時間推移"></div>
+          </div>
+          <div class="time-axis"><span>23:48</span><span>02:00</span><span>04:00</span><span>07:12</span></div>
+          <p class="graph-selection" id="timeline-c-selected" aria-live="polite">色の帯をタップすると時刻を確認できます。</p>
+          <div class="comparison-list" id="comparison-list"></div>
+          <p class="graph-note">比較範囲は画面検証用の仮データで、医学的な標準値ではありません。</p>
+        </div>
       </section>
 
       <section class="metrics-grid">
         <article><span>就寝</span><strong>23:48</strong></article>
-        <article><span>起床</span><strong>06:30</strong></article>
+        <article><span>起床</span><strong>07:12</strong></article>
         <article><span>深い睡眠</span><strong>1時間21分</strong></article>
         <article><span>REM</span><strong>1時間16分</strong></article>
       </section>
@@ -81,9 +107,9 @@
     <span id="art-readout">hero art: checking…</span>
     <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
     <span>dummy data only</span>
-    <span id="prototype-version">version: 2026-10-09 hero-fit2</span>
+    <span id="prototype-version">version: 2026-10-20 graph-abc</span>
   </aside>
 
-  <script src="../shared/prototype.js?v=20261009-hero-fit2"></script>
+  <script src="../shared/prototype.js?v=20261020-graph-abc"></script>
 </body>
 </html>
