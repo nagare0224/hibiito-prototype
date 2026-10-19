@@ -1,0 +1,38 @@
+{
+  "version": "2026-10-20 calm2",
+  "canonical": false,
+  "data": "dummy only",
+  "generator": "built-in image_gen (no API key or paid API workflow)",
+  "assets": [
+    {
+      "file": "sleep-hero-day-morning-v2.webp",
+      "sha256": "508c88f9b0b0eda65d6c55ee0eca41f3d17cb6fe18cec1c3b47d68fc65c817e4",
+      "bytes": 125066,
+      "origin": "New original AI-generated artwork using built-in image_gen; no external image input",
+      "generation_brief": "Original HIBIITO square day hero. Soft watercolor/gouache morning sky, distant green hills and tranquil lake, tender leaves and small white daisies at lower corners. Pale sunlight upper right. Central 60% clean pale sky for dark live numbers. No UI, text, character, room, logo or watermark; works circular cropped.",
+      "role": "landscape-only hero",
+      "processing": "WebP encode with sharp; hero 1024px / mascot 512px bounding box; alpha preserved",
+      "public_use": "Human explicitly requested new original public-safe repository assets for this task"
+    },
+    {
+      "file": "sleep-hero-night-lake-v2.webp",
+      "sha256": "c43afa9489767b3f2ebd6829927d772ec74880d81e2749f3aa60c41b81d63476",
+      "bytes": 74852,
+      "origin": "New original AI-generated artwork using built-in image_gen; no external image input",
+      "generation_brief": "Original HIBIITO square night hero. Muted navy sky with central 65% smooth space for white live numbers; low blue hills and still lake; sparse dark teal leaves in bottom corners. One small cream moon upper right; max three faint stars. No glitter, bright city lights, particles, strong rays, dramatic contrast, text, UI, characters or watermark; works circular cropped. Final edit: move the single moon to 73% horizontal / 23% vertical with diameter 7%, preserving the landscape; align its reflection so circle crop retains the whole moon.",
+      "role": "landscape-only hero",
+      "processing": "WebP encode with sharp; hero 1024px / mascot 512px bounding box; alpha preserved",
+      "public_use": "Human explicitly requested new original public-safe repository assets for this task"
+    },
+    {
+      "file": "sleep-note-mascot-resting-v2.webp",
+      "sha256": "6cd8d5883bd7bad92ae88b6e902503082357ae962e7ea11b4535a8dc87254a99",
+      "bytes": 77364,
+      "origin": "New original AI-generated artwork using built-in image_gen; no external image input",
+      "generation_brief": "Original HIBIITO sleep mascot on transparent background. Round cream seed creature with closed eyes and two green sprout leaves, sleeping on a pillow under a periwinkle quilt with three tiny pale embroidered stars. Tender leaves and white daisies. Soft watercolor/gouache; readable silhouette at 90px. No room, text, logo, backdrop or existing franchise.",
+      "role": "note-only mascot with alpha",
+      "processing": "WebP encode with sharp; hero 1024px / mascot 512px bounding box; alpha preserved",
+      "public_use": "Human explicitly requested new original public-safe repository assets for this task"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+/* 非canonicalのビジュアル候補。数値・操作の上に装飾を重ねない。 */
+.sleep-page{--bg:#f7f6ec;--surface:rgba(255,255,251,.94);--ink:#183f3e;--muted:#586e6b;--line:#dce6dd;background:radial-gradient(ellipse 340px 400px at 50% 170px,#e3f1e5,transparent 90%),var(--bg)}
+html[data-theme="night"] .sleep-page{--bg:#101f33;--surface:rgba(24,44,66,.96);--ink:#edf3f4;--muted:#b3c3ce;--line:#3c566b;background:radial-gradient(ellipse 350px 440px at 50% 170px,#213c5b,transparent 90%),var(--bg)}
+.sleep-page .phone-shell{padding:12px 12px 28px}
+.sleep-page .sleep-screen{gap:12px}
+.sleep-page .date-row{height:54px}
+.sleep-page .date-main{font-size:17px}
+.sleep-page .date-sub{font-size:11px}
+.sleep-page .date-row button{width:38px;height:38px}
+.sleep-page .sleep-hero{flex:none;width:min(82vw,332px);min-height:0;max-height:none;aspect-ratio:1;margin:6px auto 9px;border:2px solid rgba(255,255,246,.88);box-shadow:0 0 0 5px rgba(184,211,191,.24),0 12px 30px rgba(72,103,88,.12)}
+html[data-theme="night"] .sleep-page .sleep-hero{border-color:#a9bbc9;box-shadow:0 0 0 4px rgba(125,155,179,.08),0 12px 30px rgba(5,16,31,.22)}
+.sleep-page .sleep-hero::after{background:none}
+.sleep-page .sleep-hero .hero-copy{transform:translateY(-9px);width:calc(100% - 46px)}
+.sleep-page .sleep-hero .hero-copy::before{background:radial-gradient(ellipse,rgba(236,247,249,.6),rgba(236,247,249,.18) 60%,transparent 78%)}
+html[data-theme="night"] .sleep-page .sleep-hero .hero-copy::before{background:radial-gradient(ellipse,rgba(15,37,66,.35),transparent 76%)}
+.sleep-page .sleep-hero .hero-eyebrow{font-size:15px;margin-bottom:8px}
+.sleep-page .sleep-hero .hero-number{font-size:clamp(48px,14vw,61px);letter-spacing:-2px}
+.sleep-page .sleep-hero .hero-unit{font-size:13px}
+.sleep-page .sleep-hero .hero-support{font-size:11px;margin-top:10px}
+.sleep-page .hero-detail-cta{bottom:19px;min-height:34px;padding:8px 15px;font-size:10px;background:rgba(255,255,248,.94)}
+html[data-theme="night"] .sleep-page .hero-detail-cta{background:#dce6ee;color:#213c55;border-color:#b7c8d7}
+.sleep-page .sleep-graph{padding:14px;border-radius:22px;background:var(--surface);--deep:#5387b4;--light:#76b9b0;--rem:#ab94d3;--awake:#edc178}
+html[data-theme="night"] .sleep-page .sleep-graph{background:var(--surface);--deep:#609ad0;--light:#79bfbe;--rem:#b09add;--awake:#e7c080}
+.sleep-page .section-title-row h2{font-size:15px}
+.sleep-page .section-title-row>span{font-size:10px}
+.sleep-page .graph-quick-facts{font-size:11px;gap:6px;padding:10px 0}
+.sleep-page .graph-quick-facts strong{font-size:14px}
+.sleep-page .quick-compare{font-size:10px;min-height:30px}
+.sleep-page .timeline-lanes,.sleep-page .timeline-visual{height:126px}
+.sleep-page .timeline-lanes,.sleep-page .time-axis,.sleep-page .stage-key{font-size:10px}
+.sleep-page .stage-key{padding:7px 4px 0}
+.sleep-page .graph-selection{font-size:10px;background:transparent;border:0;padding:5px 0;margin-bottom:0}
+.sleep-page .metrics-grid{gap:9px}
+.sleep-page .metric-card{min-height:97px;border-radius:20px;padding:13px 12px 10px;background:var(--surface)}
+html[data-theme="night"] .sleep-page .metric-card{background:var(--surface)}
+.sleep-page .metric-card::after{content:"";position:absolute;pointer-events:none;right:-10px;bottom:-4px;width:93px;height:33px;background:url('../assets/sleep-garden.svg') right bottom/auto 58px no-repeat;opacity:.4}
+html[data-theme="night"] .sleep-page .metric-card::after{opacity:.19;filter:saturate(.5)}
+.sleep-page .metric-card>span:not(.metric-illustration):not(.metric-hint){font-size:11px;color:var(--ink)}
+.sleep-page .metric-card strong{font-size:17px;position:relative;z-index:1}
+.sleep-page .metric-card .metric-hint{align-self:flex-start;position:relative;z-index:1;font-size:10px;padding-top:5px;color:var(--muted)}
+.sleep-page .metric-card .metric-illustration{width:30px;height:30px;right:9px;top:10px;font-size:20px}
+.sleep-page .insight{grid-template-columns:minmax(0,1fr) 106px;gap:2px;min-height:132px;padding:15px 9px 15px 15px;background:var(--surface)}
+html[data-theme="night"] .sleep-page .insight{background:var(--surface)}
+.sleep-page .insight h2{font-size:15px;margin-bottom:8px}
+.sleep-page .insight p{font-size:11px;line-height:1.8}
+.sleep-page .insight-mascot{width:112px;max-height:125px;filter:none}
+html[data-theme="night"] .sleep-page .insight-mascot{filter:saturate(.72) brightness(.88)}
+.sleep-page .sleep-screen::after{opacity:.12}
+@media(max-width:350px){
+  .sleep-page .sleep-graph{padding:11px}
+  .sleep-page .section-title-row h2{font-size:13px}
+  .sleep-page .section-title-row>span{font-size:9px}
+  .sleep-page .graph-quick-facts{font-size:10px}
+  .sleep-page .graph-quick-facts strong{font-size:12px}
+  .sleep-page .metric-card strong{font-size:15px}
+  .sleep-page .insight{grid-template-columns:minmax(0,1fr) 82px}
+  .sleep-page .insight-mascot{width:87px}
+}
+/* 装飾の疑似要素をscreen内に収め、320pxでも横スクロールを生まない。 */
+.sleep-page .sleep-screen::after{left:0;right:0}
