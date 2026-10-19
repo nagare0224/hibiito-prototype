@@ -43,43 +43,59 @@
     }
     container.appendChild(svg);
   };
-  drawTimeline('a');drawTimeline('c');
-  const dist=document.getElementById('distribution-bar');
-  const list=document.getElementById('stage-totals');
-  for(const type of ['deep','light','rem','awake']){
-    const block=document.createElement('span');block.className='stage-'+type;
-    block.style.width=(stageTotals[type]/inBedMinutes*100)+'%';
-    block.title=stageLabels[type]+' '+formatted(stageTotals[type]);dist.appendChild(block);
-    const row=document.createElement('div');row.className='stage-total';
-    const swatch=document.createElement('i');swatch.className='swatch stage-'+type;
-    const name=document.createElement('span');name.className='stage-total-name';name.textContent=stageLabels[type];
-    const amount=document.createElement('span');amount.className='stage-total-time';amount.textContent=formatted(stageTotals[type])+' ';
-    const ratio=document.createElement('small');ratio.textContent='('+Math.round(stageTotals[type]/inBedMinutes*100)+'%)';
-    amount.appendChild(ratio);row.append(swatch,name,amount);list.appendChild(row);
-  }
-  const comparisons=[
-    ['睡眠時間','6時間42分','仮の個人範囲内：6時間30分〜7時間30分',false],
-    ['深い睡眠','1時間21分','仮の範囲内：1時間05分〜1時間45分',false],
-    ['REM','1時間16分','仮の範囲内：1時間05分〜1時間40分',false],
-    ['覚醒','42分','仮の範囲より長め：15〜35分',true]
-  ];
-  const comparisonRoot=document.getElementById('comparison-list');
-  for(const [name,value,message,over] of comparisons){
-    const row=document.createElement('div');row.className='comparison-row';
-    const title=document.createElement('span');title.textContent=name;
-    const amount=document.createElement('strong');amount.textContent=value;
-    const status=document.createElement('span');status.textContent=message;
-    if(over)status.className='over';
-    row.append(title,amount,status);comparisonRoot.appendChild(row);
-  }
-  document.querySelectorAll('[data-graph-variant]').forEach(button=>{
-    button.addEventListener('click',()=>{
-      for(const other of document.querySelectorAll('[data-graph-variant]'))other.setAttribute('aria-pressed',String(other===button));
-      for(const type of ['a','b','c'])document.getElementById('graph-'+type).hidden=type!==button.dataset.graphVariant;
-      requestAnimationFrame(checkOverflow);
-    });
-  });
+  drawTimeline('a');
 
+  const compareData={
+    total:{label:'睡眠時間',current:'6時間42分',average:'7時間00分',range:'6時間30分〜7時間30分',status:'いつもの範囲内',summary:'最近30日平均より18分短いですが、いつもの範囲内です。',value:402,min:390,max:450},
+    bedtime:{label:'就寝時刻',current:'23:48',average:'23:36',range:'23:10〜00:10',status:'いつもの範囲内',summary:'いつもの就寝時刻より12分遅めです。時刻は日付をまたいで比較しています。',value:1428,min:1390,max:1450},
+    wakeup:{label:'起床時刻',current:'07:12',average:'07:04',range:'06:30〜07:30',status:'いつもの範囲内',summary:'最近30日平均より8分遅めの起床でした。',value:432,min:390,max:450},
+    deep:{label:'深い睡眠',current:'1時間21分',average:'1時間15分',range:'1時間05分〜1時間45分',status:'いつもの範囲内',summary:'最近30日平均より6分長めで、いつもの範囲内です。',value:81,min:65,max:105},
+    rem:{label:'REM睡眠',current:'1時間16分',average:'1時間24分',range:'1時間10分〜1時間35分',status:'いつもの範囲内',summary:'最近30日平均より8分短めですが、いつもの範囲内です。',value:76,min:70,max:95},
+    awake:{label:'覚醒時間',current:'42分',average:'28分',range:'15〜35分',status:'いつもより長め',summary:'最近30日平均より14分長めです。一晩だけで良し悪しを決めず、数日間の流れを見てみましょう。',value:42,min:15,max:35}
+  };
+  const backdrop=document.getElementById('compare-backdrop');
+  const sheet=document.getElementById('compare-sheet');
+  const closeButton=document.getElementById('compare-close');
+  let compareReturnFocus=null;
+  const closeComparison=()=>{
+    if(sheet.hidden)return;
+    backdrop.hidden=true;sheet.hidden=true;document.body.classList.remove('sheet-open');
+    if(compareReturnFocus&&document.contains(compareReturnFocus))compareReturnFocus.focus();
+    compareReturnFocus=null;
+  };
+  const openComparison=(key,trigger)=>{
+    const data=compareData[key];
+    if(!data||state!==0)return;
+    compareReturnFocus=trigger;
+    document.getElementById('compare-title').textContent=data.label;
+    document.getElementById('compare-current').textContent=data.current;
+    document.getElementById('compare-average').textContent=data.average;
+    document.getElementById('compare-range').textContent=data.range;
+    document.getElementById('compare-status').textContent=data.status;
+    document.getElementById('compare-summary').textContent=data.summary;
+    const fraction=(data.value-data.min)/(data.max-data.min);
+    const marker=20+60*fraction;
+    document.getElementById('compare-marker').style.left=Math.min(95,Math.max(5,marker))+'%';
+    sheet.hidden=false;backdrop.hidden=false;document.body.classList.add('sheet-open');
+    closeButton.focus();
+  };
+  document.querySelectorAll('[data-compare]').forEach(el=>{
+    el.addEventListener('click',()=>openComparison(el.dataset.compare,el));
+  });
+  closeButton.addEventListener('click',closeComparison);
+  backdrop.addEventListener('click',closeComparison);
+  document.addEventListener('keydown',event=>{
+    if(sheet.hidden)return;
+    if(event.key==='Escape'){event.preventDefault();closeComparison();}
+    if(event.key==='Tab'){
+      const focusable=[...sheet.querySelectorAll('button:not([disabled])')];
+      if(focusable.length){
+        const first=focusable[0], last=focusable[focusable.length-1];
+        if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+        else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+      }
+    }
+  });
 
   document.querySelector('[data-action="theme"]').addEventListener('click',()=>{
     root.dataset.theme=root.dataset.theme==='night'?'day':'night';
@@ -97,6 +113,7 @@
       ['現在取得できません','この指標は現在取得できません。対応状況を確認してください。']
     ];
     const normal=state===0;
+    if(!normal)closeComparison();
     mainSections.forEach(el=>el.hidden=!normal);
     statePanel.hidden=normal;
     if(!normal){
