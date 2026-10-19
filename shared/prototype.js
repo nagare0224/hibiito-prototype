@@ -69,6 +69,7 @@
     backdrop.hidden=true;
     sheet.hidden=true;
     sheet.classList.remove('is-dragging','is-dismissing');
+    backdrop.classList.remove('is-dragging');
     sheet.style.removeProperty('--sheet-offset');
     backdrop.style.opacity='';
     document.body.classList.remove('sheet-open');
@@ -88,6 +89,7 @@
     closing=true;
     drag=null;
     sheet.classList.remove('is-dragging');
+    backdrop.classList.remove('is-dragging');
     sheet.classList.add('is-dismissing');
     sheet.style.removeProperty('--sheet-offset');
     backdrop.style.opacity='0';
@@ -109,6 +111,7 @@
     const marker=20+60*fraction;
     document.getElementById('compare-marker').style.left=Math.min(95,Math.max(5,marker))+'%';
     sheet.classList.remove('is-dragging','is-dismissing');
+    backdrop.classList.remove('is-dragging');
     sheet.style.removeProperty('--sheet-offset');
     backdrop.style.opacity='';
     sheet.hidden=false;
@@ -123,6 +126,7 @@
     if(sheet.hidden || closing || drag || (event.pointerType==='mouse' && event.button!==0))return;
     drag={pointerId:event.pointerId,startY:event.clientY,startAt:performance.now(),delta:0};
     sheet.classList.add('is-dragging');
+    backdrop.classList.add('is-dragging');
     dragHandle.setPointerCapture(event.pointerId);
   });
   dragHandle.addEventListener('pointermove',event=>{
@@ -145,6 +149,7 @@
     }
     drag=null;
     sheet.classList.remove('is-dragging');
+    backdrop.classList.remove('is-dragging');
     if(dismiss)closeComparison();
     else{
       sheet.style.removeProperty('--sheet-offset');
