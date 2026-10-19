@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 1500" preserveAspectRatio="xMidYMin slice">
+<defs>
+<linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#bce3bf"/><stop offset="1" stop-color="#7fbaa3"/></linearGradient>
+<radialGradient id="mist"><stop stop-color="#d5f1f0" stop-opacity=".78"/><stop offset="1" stop-color="#d5f1f0" stop-opacity="0"/></radialGradient>
+</defs>
+<circle cx="380" cy="195" r="145" fill="url(#mist)"/>
+<circle cx="45" cy="590" r="176" fill="url(#mist)" opacity=".5"/>
+<g opacity=".47" stroke="#8ebca4" stroke-width="3" stroke-linecap="round" fill="none">
+<path d="M-15 240Q30 188 72 124M0 1180Q71 1264 115 1374M452 1080Q391 1204 349 1355"/>
+</g>
+<g fill="url(#leaf)" opacity=".4">
+<ellipse cx="22" cy="186" rx="19" ry="39" transform="rotate(46 22 186)"/>
+<ellipse cx="56" cy="149" rx="20" ry="40" transform="rotate(20 56 149)"/>
+<ellipse cx="82" cy="104" rx="15" ry="32" transform="rotate(-18 82 104)"/>
+<ellipse cx="46" cy="1233" rx="19" ry="42" transform="rotate(-42 46 1233)"/>
+<ellipse cx="83" cy="1281" rx="17" ry="38" transform="rotate(29 83 1281)"/>
+<ellipse cx="113" cy="1357" rx="21" ry="40" transform="rotate(-14 113 1357)"/>
+<ellipse cx="401" cy="1173" rx="19" ry="38" transform="rotate(-35 401 1173)"/>
+<ellipse cx="368" cy="1240" rx="18" ry="41" transform="rotate(32 368 1240)"/>
+<ellipse cx="337" cy="1311" rx="19" ry="41" transform="rotate(-20 337 1311)"/>
+</g>
+<g fill="#fffef5" opacity=".75">
+<circle cx="74" cy="1288" r="11"/><circle cx="61" cy="1293" r="10"/><circle cx="85" cy="1301" r="10"/>
+<circle cx="371" cy="1255" r="9"/><circle cx="361" cy="1262" r="9"/><circle cx="383" cy="1263" r="9"/>
+</g>
+<path d="M0 1444Q100 1414 220 1455T450 1438V1500H0Z" fill="#d7eae0" opacity=".47"/>
+</svg>
