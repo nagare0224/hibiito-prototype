@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/prototype.css?v=20261020-graph-abc2" />
+  <link rel="stylesheet" href="../shared/prototype.css?v=20261020-compare-sheet1" />
 </head>
 <body>
   <div class="toolbar" aria-label="prototype controls">
@@ -28,8 +28,8 @@
       </header>
 
       <section class="sleep-hero">
-        <img class="hero-art hero-art-day" src="../assets/sleep-hero-day.svg?v=20261020-graph-abc2" alt="" aria-hidden="true">
-        <img class="hero-art hero-art-night" src="../assets/sleep-hero-night.svg?v=20261020-graph-abc2" alt="" aria-hidden="true">
+        <img class="hero-art hero-art-day" src="../assets/sleep-hero-day.svg?v=20261020-compare-sheet1" alt="" aria-hidden="true">
+        <img class="hero-art hero-art-night" src="../assets/sleep-hero-night.svg?v=20261020-compare-sheet1" alt="" aria-hidden="true">
         <div class="hero-copy" data-hero-safe-probe>
           <p class="hero-eyebrow">睡眠</p>
           <div class="hero-value" data-fit-probe aria-label="6時間42分">
@@ -38,51 +38,27 @@
           </div>
           <p class="hero-support" data-fit-probe>最近のあなたより 18分短め</p>
         </div>
+        <button type="button" class="hero-detail-cta" data-compare="total" aria-haspopup="dialog">睡眠時間を比較 <span aria-hidden="true">↗</span></button>
       </section>
 
 
       <section class="section-block sleep-graph">
         <div class="section-title-row" data-fit-probe><h2>睡眠の流れ</h2><span>23:48 → 07:12</span></div>
-        <div class="graph-quick-facts"><span>睡眠 <strong>6時間42分</strong></span><span>在床 7時間24分</span><span>覚醒 42分</span></div>
-        <div class="graph-switcher" role="group" aria-label="睡眠グラフ表示方法">
-          <button type="button" data-graph-variant="a" aria-pressed="true">A · 推移</button>
-          <button type="button" data-graph-variant="b" aria-pressed="false">B · 内訳</button>
-          <button type="button" data-graph-variant="c" aria-pressed="false">C · 両方</button>
+        <div class="graph-quick-facts"><span>睡眠 <strong>6時間42分</strong></span><span>在床 7時間24分</span><button class="quick-compare" type="button" data-compare="awake" aria-haspopup="dialog">覚醒 42分 <span aria-hidden="true">↗</span></button></div>
+        <div class="sleep-timeline">
+          <div class="timeline-lanes" aria-hidden="true"><span>覚醒</span><span>REM</span><span>浅い</span><span>深い</span></div>
+          <div class="timeline-visual" id="timeline-a" aria-label="各睡眠段階の時間推移"></div>
         </div>
-        <div class="graph-variant" id="graph-a">
-          <p class="graph-explain">どの時間帯に、どの眠りだったかを見られます。</p>
-          <div class="sleep-timeline">
-            <div class="timeline-lanes" aria-hidden="true"><span>覚醒</span><span>REM</span><span>浅い</span><span>深い</span></div>
-            <div class="timeline-visual" id="timeline-a" aria-label="各睡眠段階の時間推移"></div>
-          </div>
-          <div class="time-axis"><span>23:48</span><span>02:00</span><span>04:00</span><span>07:12</span></div>
-          <p class="graph-selection" id="timeline-a-selected" aria-live="polite">色の帯をタップすると、その時刻の眠りが分かります。</p>
-          <div class="stage-key"><span><i class="key-deep"></i>深い</span><span><i class="key-light"></i>浅い</span><span><i class="key-rem"></i>REM</span><span><i class="key-awake"></i>覚醒</span></div>
-        </div>
-        <div class="graph-variant" id="graph-b" hidden>
-          <p class="graph-explain">各段階の合計時間と割合を見比べられます。</p>
-          <div class="distribution-bar" id="distribution-bar" role="img" aria-label="在床時間の段階別割合"></div>
-          <div class="stage-totals" id="stage-totals"></div>
-          <p class="graph-note">割合の分母は在床時間（7時間24分）です。</p>
-        </div>
-        <div class="graph-variant" id="graph-c" hidden>
-          <p class="graph-explain">時間の流れと各段階の合計、仮の比較目安を一緒に。</p>
-          <div class="sleep-timeline timeline-compact">
-            <div class="timeline-lanes" aria-hidden="true"><span>覚醒</span><span>REM</span><span>浅い</span><span>深い</span></div>
-            <div class="timeline-visual" id="timeline-c" aria-label="各睡眠段階の時間推移"></div>
-          </div>
-          <div class="time-axis"><span>23:48</span><span>02:00</span><span>04:00</span><span>07:12</span></div>
-          <p class="graph-selection" id="timeline-c-selected" aria-live="polite">色の帯をタップすると時刻を確認できます。</p>
-          <div class="comparison-list" id="comparison-list"></div>
-          <p class="graph-note">比較範囲は画面検証用の仮データで、医学的な標準値ではありません。</p>
-        </div>
+        <div class="time-axis"><span>23:48</span><span>02:00</span><span>04:00</span><span>07:12</span></div>
+        <p class="graph-selection" id="timeline-a-selected" aria-live="polite">色の帯をタップすると、その時間帯の眠りを確認できます。</p>
+        <div class="stage-key"><span><i class="key-deep"></i>深い</span><span><i class="key-light"></i>浅い</span><span><i class="key-rem"></i>REM</span><span><i class="key-awake"></i>覚醒</span></div>
       </section>
 
-      <section class="metrics-grid">
-        <article><span>就寝</span><strong>23:48</strong></article>
-        <article><span>起床</span><strong>07:12</strong></article>
-        <article><span>深い睡眠</span><strong>1時間21分</strong></article>
-        <article><span>REM</span><strong>1時間16分</strong></article>
+      <section class="metrics-grid" aria-label="睡眠指標・タップで個人比較">
+        <button class="metric-card" type="button" data-compare="bedtime" aria-haspopup="dialog"><span>就寝</span><strong>23:48</strong><span class="metric-hint">比較を見る ↗</span></button>
+        <button class="metric-card" type="button" data-compare="wakeup" aria-haspopup="dialog"><span>起床</span><strong>07:12</strong><span class="metric-hint">比較を見る ↗</span></button>
+        <button class="metric-card" type="button" data-compare="deep" aria-haspopup="dialog"><span>深い睡眠</span><strong>1時間21分</strong><span class="metric-hint">比較を見る ↗</span></button>
+        <button class="metric-card" type="button" data-compare="rem" aria-haspopup="dialog"><span>REM</span><strong>1時間16分</strong><span class="metric-hint">比較を見る ↗</span></button>
       </section>
 
       <section class="insight">
@@ -100,6 +76,25 @@
     </section>
   </main>
 
+
+  <div class="sheet-backdrop" id="compare-backdrop" hidden></div>
+  <section class="comparison-sheet" id="compare-sheet" role="dialog" aria-modal="true" aria-labelledby="compare-title" tabindex="-1" hidden>
+    <div class="sheet-grabber" aria-hidden="true"></div>
+    <div class="sheet-heading">
+      <span class="sheet-eyebrow">いつもの自分と比べる</span>
+      <button id="compare-close" class="sheet-close" type="button" aria-label="比較を閉じる">×</button>
+    </div>
+    <h2 id="compare-title">睡眠時間</h2>
+    <div class="sheet-current"><div><span>今回</span><strong id="compare-current">6時間42分</strong></div><span id="compare-status" class="sheet-status">いつもの範囲内</span></div>
+    <div class="sheet-stats">
+      <div><span>最近30日平均（デモ）</span><strong id="compare-average">7時間00分</strong></div>
+      <div><span>いつもの範囲（デモ）</span><strong id="compare-range">6時間30分〜7時間30分</strong></div>
+    </div>
+    <div class="sheet-scale" aria-hidden="true"><span class="sheet-range-band"></span><span id="compare-marker" class="sheet-marker"></span></div>
+    <p class="sheet-summary" id="compare-summary">最近30日平均より18分短いですが、いつもの範囲内です。</p>
+    <p class="sheet-disclaimer">この比較はデザイン確認用の仮データです。医学的な正常・異常の判定ではありません。</p>
+  </section>
+
   <aside class="debug-panel">
     <strong>Prototype checks</strong>
     <span id="viewport-readout"></span>
@@ -107,9 +102,9 @@
     <span id="art-readout">hero art: checking…</span>
     <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
     <span>dummy data only</span>
-    <span id="prototype-version">version: 2026-10-20 graph-abc2</span>
+    <span id="prototype-version">version: 2026-10-20 compare-sheet1</span>
   </aside>
 
-  <script src="../shared/prototype.js?v=20261020-graph-abc2"></script>
+  <script src="../shared/prototype.js?v=20261020-compare-sheet1"></script>
 </body>
 </html>
