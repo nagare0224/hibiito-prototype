@@ -181,6 +181,7 @@ html[data-theme="night"] .hero-detail-cta{background:rgba(14,40,54,.83)}
   outline:2px solid var(--accent);outline-offset:3px
 }
 .sheet-backdrop{position:fixed;inset:0;background:rgba(9,22,31,.49);z-index:80;transition:opacity 240ms ease}
+.sheet-backdrop.is-dragging{transition:none}
 .comparison-sheet{
   position:fixed;z-index:81;bottom:0;left:50%;transform:translate3d(-50%,var(--sheet-offset,0px),0);width:min(100%,430px);
   max-height:calc(100dvh - 18px);overflow-y:auto;overscroll-behavior:contain;
