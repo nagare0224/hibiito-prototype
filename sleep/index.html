@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/prototype.css?v=20261020-compare-sheet1" />
+  <link rel="stylesheet" href="../shared/prototype.css?v=20261020-swipe-sheet2" />
 </head>
 <body>
   <div class="toolbar" aria-label="prototype controls">
@@ -28,8 +28,8 @@
       </header>
 
       <section class="sleep-hero">
-        <img class="hero-art hero-art-day" src="../assets/sleep-hero-day.svg?v=20261020-compare-sheet1" alt="" aria-hidden="true">
-        <img class="hero-art hero-art-night" src="../assets/sleep-hero-night.svg?v=20261020-compare-sheet1" alt="" aria-hidden="true">
+        <img class="hero-art hero-art-day" src="../assets/sleep-hero-day.svg?v=20261020-swipe-sheet2" alt="" aria-hidden="true">
+        <img class="hero-art hero-art-night" src="../assets/sleep-hero-night.svg?v=20261020-swipe-sheet2" alt="" aria-hidden="true">
         <div class="hero-copy" data-hero-safe-probe>
           <p class="hero-eyebrow">睡眠</p>
           <div class="hero-value" data-fit-probe aria-label="6時間42分">
@@ -79,10 +79,12 @@
 
   <div class="sheet-backdrop" id="compare-backdrop" hidden></div>
   <section class="comparison-sheet" id="compare-sheet" role="dialog" aria-modal="true" aria-labelledby="compare-title" tabindex="-1" hidden>
-    <div class="sheet-grabber" aria-hidden="true"></div>
+    <button class="sheet-drag-handle" id="compare-handle" type="button" aria-label="比較を閉じる。下にスワイプまたはタップしてください">
+      <span class="sheet-grabber" aria-hidden="true"></span>
+    </button>
     <div class="sheet-heading">
       <span class="sheet-eyebrow">いつもの自分と比べる</span>
-      <button id="compare-close" class="sheet-close" type="button" aria-label="比較を閉じる">×</button>
+      <span class="sheet-dismiss-hint">下にスワイプで閉じる</span>
     </div>
     <h2 id="compare-title">睡眠時間</h2>
     <div class="sheet-current"><div><span>今回</span><strong id="compare-current">6時間42分</strong></div><span id="compare-status" class="sheet-status">いつもの範囲内</span></div>
@@ -102,9 +104,9 @@
     <span id="art-readout">hero art: checking…</span>
     <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
     <span>dummy data only</span>
-    <span id="prototype-version">version: 2026-10-20 compare-sheet1</span>
+    <span id="prototype-version">version: 2026-10-20 swipe-sheet2</span>
   </aside>
 
-  <script src="../shared/prototype.js?v=20261020-compare-sheet1"></script>
+  <script src="../shared/prototype.js?v=20261020-swipe-sheet2"></script>
 </body>
 </html>
