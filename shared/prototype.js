@@ -7,6 +7,80 @@
   const copy=document.getElementById('insight-copy');
   let state=0, longCopy=false;
 
+  // Synthetic design sample. Consistency: in-bed 444 = asleep 402 + awake 42 minutes.
+  const stageSegments = [["light",25],["deep",25],["light",22],["rem",17],["light",31],["awake",10],["light",24],["deep",18],["light",25],["rem",22],["light",23],["deep",20],["light",28],["awake",12],["light",32],["rem",21],["light",35],["deep",18],["awake",20],["rem",16]];
+  const stageLabels = {deep:'深い睡眠',light:'浅い睡眠',rem:'REM睡眠',awake:'覚醒'};
+  const stageTotals = {deep:81,light:245,rem:76,awake:42};
+  const stagePositions = {awake:12,rem:40,light:68,deep:96};
+  const inBedMinutes = 444;
+  const clock = minutes => {
+    const m = (23*60 + 48 + minutes) % (24*60);
+    return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
+  };
+  const formatted = minutes => minutes >= 60 ? Math.floor(minutes/60)+'時間'+String(minutes%60).padStart(2,'0')+'分' : minutes+'分';
+  const drawTimeline = id => {
+    const container=document.getElementById('timeline-'+id);
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox','0 0 600 116');
+    svg.setAttribute('preserveAspectRatio','none');
+    svg.setAttribute('role','img');
+    svg.setAttribute('aria-label','23時48分から7時12分までの睡眠段階の推移');
+    const el=(tag,attrs)=>{const e=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,String(v));return e;};
+    [12,40,68,96].forEach(y=>svg.appendChild(el('line',{x1:0,x2:600,y1:y+8,y2:y+8,class:'stage-grid'})));
+    let elapsed=0,previous=null;
+    const selected=document.getElementById('timeline-'+id+'-selected');
+    for(const [type,minutes] of stageSegments){
+      const x=elapsed/inBedMinutes*600;
+      const w=minutes/inBedMinutes*600;
+      const y=stagePositions[type];
+      if(previous!==null && previous!==type)svg.appendChild(el('line',{x1:x,x2:x,y1:stagePositions[previous]+8,y2:y+8,class:'stage-transition'}));
+      const bar=el('rect',{x:x+0.5,y,width:Math.max(2,w-1),height:16,rx:3,class:'stage-segment stage-'+type,tabindex:0,role:'button'});
+      const msg=clock(elapsed)+'〜'+clock(elapsed+minutes)+' '+stageLabels[type]+'（'+formatted(minutes)+'）';
+      bar.setAttribute('aria-label',msg);
+      bar.addEventListener('click',()=>{selected.textContent=msg;});
+      bar.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();selected.textContent=msg;}});
+      svg.appendChild(bar);previous=type;elapsed+=minutes;
+    }
+    container.appendChild(svg);
+  };
+  drawTimeline('a');drawTimeline('c');
+  const dist=document.getElementById('distribution-bar');
+  const list=document.getElementById('stage-totals');
+  for(const type of ['deep','light','rem','awake']){
+    const block=document.createElement('span');block.className='stage-'+type;
+    block.style.width=(stageTotals[type]/inBedMinutes*100)+'%';
+    block.title=stageLabels[type]+' '+formatted(stageTotals[type]);dist.appendChild(block);
+    const row=document.createElement('div');row.className='stage-total';
+    const swatch=document.createElement('i');swatch.className='swatch stage-'+type;
+    const name=document.createElement('span');name.className='stage-total-name';name.textContent=stageLabels[type];
+    const amount=document.createElement('span');amount.className='stage-total-time';amount.textContent=formatted(stageTotals[type])+' ';
+    const ratio=document.createElement('small');ratio.textContent='('+Math.round(stageTotals[type]/inBedMinutes*100)+'%)';
+    amount.appendChild(ratio);row.append(swatch,name,amount);list.appendChild(row);
+  }
+  const comparisons=[
+    ['睡眠時間','6時間42分','仮の個人範囲内：6時間30分〜7時間30分',false],
+    ['深い睡眠','1時間21分','仮の範囲内：1時間05分〜1時間45分',false],
+    ['REM','1時間16分','仮の範囲内：1時間05分〜1時間40分',false],
+    ['覚醒','42分','仮の範囲より長め：15〜35分',true]
+  ];
+  const comparisonRoot=document.getElementById('comparison-list');
+  for(const [name,value,message,over] of comparisons){
+    const row=document.createElement('div');row.className='comparison-row';
+    const title=document.createElement('span');title.textContent=name;
+    const amount=document.createElement('strong');amount.textContent=value;
+    const status=document.createElement('span');status.textContent=message;
+    if(over)status.className='over';
+    row.append(title,amount,status);comparisonRoot.appendChild(row);
+  }
+  document.querySelectorAll('[data-graph-variant]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      for(const other of document.querySelectorAll('[data-graph-variant]'))other.setAttribute('aria-pressed',String(other===button));
+      for(const type of ['a','b','c'])document.getElementById('graph-'+type).hidden=type!==button.dataset.graphVariant;
+      requestAnimationFrame(checkOverflow);
+    });
+  });
+
+
   document.querySelector('[data-action="theme"]').addEventListener('click',()=>{
     root.dataset.theme=root.dataset.theme==='night'?'day':'night';
     requestAnimationFrame(checkOverflow);
