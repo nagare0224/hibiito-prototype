@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../shared/prototype.css?v=20261020-swipe-sheet3" />
+  <link rel="stylesheet" href="../shared/prototype.css?v=20261020-visual1" />
 </head>
 <body>
   <div class="toolbar" aria-label="prototype controls">
@@ -17,7 +17,7 @@
   </div>
 
   <main class="phone-shell">
-    <section class="screen" id="sleep-screen">
+    <section class="screen sleep-screen" id="sleep-screen">
       <header class="date-row">
         <button aria-label="前日">‹</button>
         <div>
@@ -28,8 +28,8 @@
       </header>
 
       <section class="sleep-hero">
-        <img class="hero-art hero-art-day" src="../assets/sleep-hero-day.svg?v=20261020-swipe-sheet3" alt="" aria-hidden="true">
-        <img class="hero-art hero-art-night" src="../assets/sleep-hero-night.svg?v=20261020-swipe-sheet3" alt="" aria-hidden="true">
+        <img class="hero-art hero-art-day" src="../assets/sleep-hero-day.svg?v=20261020-visual1" alt="" aria-hidden="true">
+        <img class="hero-art hero-art-night" src="../assets/sleep-hero-night.svg?v=20261020-visual1" alt="" aria-hidden="true">
         <div class="hero-copy" data-hero-safe-probe>
           <p class="hero-eyebrow">睡眠</p>
           <div class="hero-value" data-fit-probe aria-label="6時間42分">
@@ -43,7 +43,7 @@
 
 
       <section class="section-block sleep-graph">
-        <div class="section-title-row" data-fit-probe><h2>睡眠の流れ</h2><span>23:48 → 07:12</span></div>
+        <div class="section-title-row" data-fit-probe><h2><span class="heading-flower" aria-hidden="true">✦</span>睡眠の流れ</h2><span>23:48 → 07:12</span></div>
         <div class="graph-quick-facts"><span>睡眠 <strong>6時間42分</strong></span><span>在床 7時間24分</span><button class="quick-compare" type="button" data-compare="awake" aria-haspopup="dialog">覚醒 42分 <span aria-hidden="true">↗</span></button></div>
         <div class="sleep-timeline">
           <div class="timeline-lanes" aria-hidden="true"><span>覚醒</span><span>REM</span><span>浅い</span><span>深い</span></div>
@@ -55,21 +55,22 @@
       </section>
 
       <section class="metrics-grid" aria-label="睡眠指標・タップで個人比較">
-        <button class="metric-card" type="button" data-compare="bedtime" aria-haspopup="dialog"><span>就寝</span><strong>23:48</strong><span class="metric-hint">比較を見る ↗</span></button>
-        <button class="metric-card" type="button" data-compare="wakeup" aria-haspopup="dialog"><span>起床</span><strong>07:12</strong><span class="metric-hint">比較を見る ↗</span></button>
-        <button class="metric-card" type="button" data-compare="deep" aria-haspopup="dialog"><span>深い睡眠</span><strong>1時間21分</strong><span class="metric-hint">比較を見る ↗</span></button>
-        <button class="metric-card" type="button" data-compare="rem" aria-haspopup="dialog"><span>REM</span><strong>1時間16分</strong><span class="metric-hint">比較を見る ↗</span></button>
+        <button class="metric-card" type="button" data-compare="bedtime" aria-haspopup="dialog"><span class="metric-illustration" aria-hidden="true">✧</span><span>就寝</span><strong>23:48</strong><span class="metric-hint">比較を見る ↗</span></button>
+        <button class="metric-card" type="button" data-compare="wakeup" aria-haspopup="dialog"><span class="metric-illustration" aria-hidden="true">☀</span><span>起床</span><strong>07:12</strong><span class="metric-hint">比較を見る ↗</span></button>
+        <button class="metric-card" type="button" data-compare="deep" aria-haspopup="dialog"><span class="metric-illustration" aria-hidden="true">☾</span><span>深い睡眠</span><strong>1時間21分</strong><span class="metric-hint">比較を見る ↗</span></button>
+        <button class="metric-card" type="button" data-compare="rem" aria-haspopup="dialog"><span class="metric-illustration" aria-hidden="true">☁</span><span>REM</span><strong>1時間16分</strong><span class="metric-hint">比較を見る ↗</span></button>
       </section>
 
       <section class="insight">
-        <div class="sprout" aria-hidden="true">✦</div>
-        <div data-fit-probe>
-          <h2>ひとこと</h2>
+        <div class="insight-content" data-fit-probe>
+          <h2><span class="heading-flower" aria-hidden="true">♧</span>ひとこと</h2>
           <p id="insight-copy">いつもより少し短めの睡眠でした。今日は無理を決めつけず、体調も一緒に見てみましょう。</p>
         </div>
+        <img class="insight-mascot" src="../assets/sleep-mascot.svg?v=20261020-visual1" alt="" aria-hidden="true">
       </section>
 
       <section class="state-panel" id="state-panel" hidden>
+        <div class="state-art" aria-hidden="true">☁</div>
         <strong id="state-title">データなし</strong>
         <p id="state-message">昨夜の睡眠データは見つかりませんでした。0時間としては扱いません。</p>
       </section>
@@ -104,9 +105,9 @@
     <span id="art-readout">hero art: checking…</span>
     <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
     <span>dummy data only</span>
-    <span id="prototype-version">version: 2026-10-20 swipe-sheet3</span>
+    <span id="prototype-version">version: 2026-10-20 visual1</span>
   </aside>
 
-  <script src="../shared/prototype.js?v=20261020-swipe-sheet3"></script>
+  <script src="../shared/prototype.js?v=20261020-visual1"></script>
 </body>
 </html>
