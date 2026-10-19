@@ -126,7 +126,12 @@ html[data-theme="night"] .sleep-graph{--deep:#487faf;--light:#8bc5cc;--rem:#ac91
 .stage-light{fill:var(--light);background:var(--light)}
 .stage-rem{fill:var(--rem);background:var(--rem)}
 .stage-awake{fill:var(--awake);background:var(--awake)}
-.time-axis{margin-left:43px;display:flex;justify-content:space-between;gap:3px;color:var(--muted);font-size:9px;font-variant-numeric:tabular-nums}
+.time-axis{position:relative;height:17px;margin-left:43px;color:var(--muted);font-size:9px;font-variant-numeric:tabular-nums}
+.time-axis span{position:absolute;top:0;white-space:nowrap;transform:translateX(-50%)}
+.time-axis span:nth-child(1){left:0;transform:none}
+.time-axis span:nth-child(2){left:29.73%}
+.time-axis span:nth-child(3){left:56.76%}
+.time-axis span:nth-child(4){right:0;transform:none}
 .graph-selection{font-size:10px;line-height:1.45;margin:8px 0;padding:7px 9px;min-height:29px;background:color-mix(in srgb,var(--accent2) 27%,var(--surface));border-radius:9px}
 .stage-key{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px;font-size:9px;color:var(--muted)}
 .stage-key span{display:flex;align-items:center;gap:4px}
