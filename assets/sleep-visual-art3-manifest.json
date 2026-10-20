@@ -1,0 +1,95 @@
+{
+  "version": "2026-10-21 visual-asset-v3",
+  "canonical": false,
+  "data": "dummy only",
+  "base_preview_sha": "cb92522f51d5f701f11c49c0058b3b2149890348",
+  "assets": [
+    {
+      "file": "assets/sleep-card-bedtime.webp",
+      "bytes": 35524,
+      "sha256": "9f8565990c87f3ee79f51fcefb96791dbf3dcdfcbfb8267039e0676cd2b85beb",
+      "width": 384,
+      "height": 384,
+      "mode": "RGB"
+    },
+    {
+      "file": "assets/sleep-card-deep.webp",
+      "bytes": 48404,
+      "sha256": "5f0243b66c557976469f48011a8098559283fca29ce97286131d41002c562014",
+      "width": 384,
+      "height": 384,
+      "mode": "RGB"
+    },
+    {
+      "file": "assets/sleep-card-rem.webp",
+      "bytes": 31766,
+      "sha256": "46184201e19fd0c1b19d55fa2ecb0ac7055294fa53b480c4775a5994a5ce38d7",
+      "width": 384,
+      "height": 384,
+      "mode": "RGB"
+    },
+    {
+      "file": "assets/sleep-card-wakeup.webp",
+      "bytes": 34360,
+      "sha256": "1ec15a42ae2f855a3cf028ebd3db080e903bf72568f2b51e0ec87fd097eb8c60",
+      "width": 384,
+      "height": 384,
+      "mode": "RGB"
+    },
+    {
+      "file": "assets/sleep-hero-day.webp",
+      "bytes": 160260,
+      "sha256": "a5a6f030b7121d64c133a364889c990f7ef873d6b94572bedad20eb7d5f3b0a8",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "assets/sleep-hero-night.webp",
+      "bytes": 147158,
+      "sha256": "7c7ae3eceaea60660a0cf5166ebdd7323b4a9c7332ce08c3b19533edaf5d16ef",
+      "width": 1024,
+      "height": 1024,
+      "mode": "RGB"
+    },
+    {
+      "file": "assets/sleep-note-mascot.webp",
+      "bytes": 90838,
+      "sha256": "fbba37fc83f721732225249cd87d2a427e9eeeb1153fa674294380a152a5dd7e",
+      "width": 640,
+      "height": 640,
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/sleep-note-sprout.webp",
+      "bytes": 8984,
+      "sha256": "1dd67d46237596648ec00e1a35b24c985ac30ed962f2952f96068e1eff2f67b7",
+      "width": 256,
+      "height": 256,
+      "mode": "RGBA"
+    },
+    {
+      "file": "assets/sleep-page-day.webp",
+      "bytes": 105078,
+      "sha256": "436394f4b8b22834dc5dae7c4935ee7ea6fca8d9b9e1f52439e78cd139695a27",
+      "width": 940,
+      "height": 1670,
+      "mode": "RGB"
+    },
+    {
+      "file": "assets/sleep-page-night.webp",
+      "bytes": 94972,
+      "sha256": "6993b1ef17663cffcecd21f17a5cbdd37ad3b5af43c747b52aed37b4e1d89e86",
+      "width": 940,
+      "height": 1670,
+      "mode": "RGB"
+    }
+  ],
+  "source": "Original v1 generated images supplied in preceding conversation; WebP preprocessed in local container, no new external copyrighted inputs",
+  "human_visual_state": "PENDING",
+  "deployment_evidence": "GitHub Pages workflow for the containing preview commit",
+  "integration_notes": [
+    "All ten supplied WebP bytes preserved; no regeneration or re-encoding.",
+    "CSS only: 381–400px metric illustration width/padding fit; Night Hero image slot 110% with left -10% so moon fits circle."
+  ]
+}

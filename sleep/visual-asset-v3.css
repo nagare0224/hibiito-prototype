@@ -1,0 +1,171 @@
+/* HIBIITO Sleep / Visual asset integration v3
+ * Noncanonical public dummy-only prototype. Text, graph and controls stay live.
+ * Load AFTER shared/prototype.css and sleep/visual-calm.css.
+ */
+body.sleep-page{
+  position:relative; isolation:isolate;
+  --bg:#f6f6ee; --surface:rgba(255,255,251,.96);
+  --ink:#1b4040; --muted:#617671; --line:#dee7de;
+  --shadow:0 7px 20px rgba(48,78,63,.09);
+  background:var(--bg); color:var(--ink);
+}
+html[data-theme="night"] body.sleep-page{
+  --bg:#10223b; --surface:rgba(21,42,68,.94);
+  --ink:#edf3f8; --muted:#bdccd7; --line:#43627e;
+  --shadow:0 7px 22px rgba(3,12,30,.27);
+  background:var(--bg); color:var(--ink);
+}
+/* Separate painted room from data-bearing cards. Never turn this into a flattened UI image. */
+.sleep-page .sleep-page-scene{
+  position:fixed; z-index:0; inset:0; pointer-events:none;
+  background-image:linear-gradient(to bottom,rgba(250,250,242,.08),rgba(250,249,241,.53) 56%,rgba(248,247,239,.85)),url("../assets/sleep-page-day.webp");
+  background-size:cover; background-position:center top;
+  opacity:.76;
+}
+html[data-theme="night"] .sleep-page .sleep-page-scene{
+  background-image:linear-gradient(to bottom,rgba(8,25,48,.26),rgba(9,24,44,.53) 47%,rgba(10,25,45,.88)),url("../assets/sleep-page-night.webp");
+  background-position:center bottom; background-size:auto 135vh; opacity:.78;
+}
+.sleep-page .toolbar{position:sticky;z-index:20;border-color:color-mix(in srgb,var(--line) 60%,transparent);background:color-mix(in srgb,var(--bg) 75%,transparent);backdrop-filter:blur(16px)}
+.sleep-page .phone-shell,.sleep-page .debug-panel{position:relative;z-index:1}
+.sleep-page .sleep-screen{gap:13px}
+.sleep-page .sleep-screen::after{content:none}
+.sleep-page .date-main{font-size:18px;text-shadow:0 1px 6px color-mix(in srgb,var(--bg) 65%,transparent)}
+.sleep-page .date-sub{font-size:12px}
+.sleep-page .date-row button{border:1px solid var(--line);background:var(--surface);border-radius:50%;box-shadow:var(--shadow);font-size:24px}
+.sleep-page .sleep-hero{
+  margin:6px auto 14px; width:min(83vw,340px);aspect-ratio:1;
+  border:3px solid rgba(255,255,247,.96);box-shadow:0 0 0 5px rgba(211,228,208,.58),0 12px 35px rgba(31,65,71,.13);
+}
+html[data-theme="night"] .sleep-page .sleep-hero{border-color:rgba(210,225,237,.88);box-shadow:0 0 0 4px rgba(136,175,204,.17),0 15px 34px rgba(0,12,28,.3)}
+.sleep-page .sleep-hero .hero-art{object-position:center center}
+html[data-theme="night"] .sleep-page .sleep-hero .hero-art-night{filter:saturate(.76) brightness(.82) contrast(.96)}
+.sleep-page .sleep-hero .hero-copy::before{background:radial-gradient(ellipse,rgba(235,250,250,.67),rgba(243,249,250,.3) 53%,transparent 79%)}
+html[data-theme="night"] .sleep-page .sleep-hero .hero-copy::before{background:radial-gradient(ellipse,rgba(8,32,62,.55),rgba(9,29,56,.29) 63%,transparent 84%)}
+.sleep-page .sleep-hero .hero-number{font-size:clamp(49px,15vw,64px)}
+.sleep-page .sleep-hero .hero-unit{font-size:13px}
+.sleep-page .sleep-hero .hero-support{font-size:11px;line-height:1.4}
+.sleep-page .hero-detail-cta{font-size:11px;min-height:37px;bottom:19px;box-shadow:0 3px 12px rgba(22,58,53,.11)}
+.sleep-page .section-block.sleep-graph{
+  position:relative;isolation:isolate;overflow:hidden;
+  border-radius:25px; padding:17px 14px 15px;
+  background:var(--surface);border:1px solid rgba(222,231,221,.92);
+  box-shadow:var(--shadow);backdrop-filter:blur(10px);
+  --deep:#4b85b8; --light:#73bcb5; --rem:#aa8cd6; --awake:#f1c477;
+}
+html[data-theme="night"] .sleep-page .section-block.sleep-graph{
+  background:rgba(20,42,70,.94);border-color:#466882;
+  --deep:#65a8ed; --light:#89d1ca; --rem:#bea5ee; --awake:#f3c784;
+}
+.sleep-page .sleep-graph::before,.sleep-page .sleep-graph::after{
+  content:"";position:absolute;pointer-events:none;z-index:0;bottom:-34px;
+  width:120px;height:115px;opacity:.63;
+  background:url("../assets/sleep-garden.svg") left bottom/contain no-repeat;
+}
+.sleep-page .sleep-graph::before{left:-34px}
+.sleep-page .sleep-graph::after{right:-35px;transform:scaleX(-1)}
+html[data-theme="night"] .sleep-page .sleep-graph::before,
+html[data-theme="night"] .sleep-page .sleep-graph::after{opacity:.2;filter:saturate(.45)}
+.sleep-page .sleep-graph>*{position:relative;z-index:1}
+.sleep-page .section-title-row h2{font-size:16px}
+.sleep-page .section-title-row>span{font-size:11px}
+.sleep-page .graph-quick-facts{gap:5px 7px;padding:11px 0}
+.sleep-page .graph-quick-facts strong{font-size:15px}
+.sleep-page .sleep-timeline{gap:7px;grid-template-columns:41px minmax(0,1fr)}
+.sleep-page .timeline-lanes,.sleep-page .timeline-visual{height:138px}
+.sleep-page .timeline-lanes,.sleep-page .time-axis,.sleep-page .stage-key{font-size:11px}
+.sleep-page .timeline-visual{
+  background:repeating-linear-gradient(to bottom,transparent 0 33px,color-mix(in srgb,var(--line) 32%,transparent) 34px),color-mix(in srgb,var(--surface) 65%,#e8f3ee);
+  border:1px solid color-mix(in srgb,var(--line) 40%,transparent);
+}
+html[data-theme="night"] .sleep-page .timeline-visual{
+  background:repeating-linear-gradient(to bottom,transparent 0 33px,rgba(143,177,206,.10) 34px),rgba(17,44,74,.8);
+}
+.sleep-page .time-axis{margin-left:48px;min-height:19px}
+.sleep-page .stage-key{margin:7px 0 4px;padding:6px 6px 2px;gap:6px 9px;justify-content:space-around}
+.sleep-page .graph-selection{font-size:11px;line-height:1.5;margin-top:7px;text-align:center}
+.sleep-page .metrics-grid{gap:10px}
+.sleep-page .metrics-grid .metric-card{
+  position:relative;display:flex;flex-direction:column;align-items:stretch;text-align:left;
+  min-height:112px;min-width:0;padding:13px 23px 13px 88px;gap:4px;
+  border-radius:22px;overflow:hidden;
+  background:rgba(255,255,252,.96);border:1px solid rgba(219,230,217,.93);
+  box-shadow:var(--shadow);backdrop-filter:blur(7px); color:var(--ink);
+}
+html[data-theme="night"] .sleep-page .metrics-grid .metric-card{
+  background:rgba(22,47,78,.95);border-color:#486981;
+}
+.sleep-page .metrics-grid .metric-card::before{
+  content:"›";position:absolute;right:8px;top:10px;width:24px;height:24px;
+  border-radius:50%;background:color-mix(in srgb,var(--accent2) 32%,var(--surface));
+  display:grid;place-items:center;font:23px/1 system-ui;color:var(--ink);
+}
+.sleep-page .metrics-grid .metric-card::after{opacity:.31;bottom:-10px}
+html[data-theme="night"] .sleep-page .metrics-grid .metric-card::after{opacity:.20}
+.sleep-page .metrics-grid .metric-card .metric-illustration{
+  position:absolute;left:10px;top:50%;right:auto;transform:translateY(-50%);
+  display:block;width:68px;height:80px;max-width:68px;pointer-events:none;
+  border-radius:16px;border:1px solid color-mix(in srgb,var(--line) 50%,transparent);
+  background-color:#eaf3eb;background-size:cover;background-position:center;background-repeat:no-repeat;
+  font-size:0!important;color:transparent!important;
+}
+.sleep-page .metrics-grid .metric-card:nth-child(1) .metric-illustration{background-image:url("../assets/sleep-card-bedtime.webp")}
+.sleep-page .metrics-grid .metric-card:nth-child(2) .metric-illustration{background-image:url("../assets/sleep-card-wakeup.webp")}
+.sleep-page .metrics-grid .metric-card:nth-child(3) .metric-illustration{background-image:url("../assets/sleep-card-deep.webp")}
+.sleep-page .metrics-grid .metric-card:nth-child(4) .metric-illustration{background-image:url("../assets/sleep-card-rem.webp")}
+.sleep-page .metrics-grid .metric-card>span:not(.metric-illustration):not(.metric-hint){
+  position:relative;z-index:1;font-size:11px;color:var(--ink);line-height:1.35;
+}
+.sleep-page .metrics-grid .metric-card strong{
+  position:relative;z-index:1;font-size:17px;line-height:1.25;
+  font-variant-numeric:tabular-nums;white-space:nowrap;letter-spacing:-.035em;
+}
+.sleep-page .metrics-grid .metric-card .metric-hint{
+  align-self:flex-start;margin-top:auto;position:relative;z-index:1;
+  padding-top:5px;font-size:11px;color:var(--muted);white-space:nowrap;
+}
+.sleep-page .insight{
+  min-height:135px;grid-template-columns:minmax(0,1fr) 120px;
+  padding:16px 10px 15px 16px;gap:4px;
+  border-radius:23px;background:var(--surface);border-color:var(--line);
+  box-shadow:var(--shadow);
+}
+html[data-theme="night"] .sleep-page .insight{background:rgba(21,44,72,.94)}
+.sleep-page .insight h2{display:flex;align-items:center;gap:5px;font-size:16px;margin:0 0 8px}
+.sleep-page .insight .heading-flower{
+  display:inline-block;flex:none;width:24px;height:24px;margin:0;
+  background:url("../assets/sleep-note-sprout.webp") center/contain no-repeat;
+  font-size:0;line-height:0;color:transparent;
+}
+.sleep-page .insight p{font-size:12px;line-height:1.75}
+.sleep-page .insight-mascot{width:117px;max-height:130px;filter:none}
+html[data-theme="night"] .sleep-page .insight-mascot{filter:saturate(.88) brightness(.93)}
+/* Preserve readable content and tap targets on narrow devices. */
+@media(max-width:380px){
+  .sleep-page .metrics-grid .metric-card{padding-left:76px;padding-right:20px;min-height:108px}
+  .sleep-page .metrics-grid .metric-card .metric-illustration{left:7px;width:62px;height:76px}
+  .sleep-page .metrics-grid .metric-card strong{font-size:15px}
+  .sleep-page .metrics-grid .metric-card .metric-hint{font-size:10px}
+  .sleep-page .insight{grid-template-columns:minmax(0,1fr) 98px;padding-left:12px}
+  .sleep-page .insight-mascot{width:98px}
+}
+@media(max-width:350px){
+  .sleep-page .sleep-hero{width:min(89vw,310px)}
+  .sleep-page .sleep-graph{padding:11px}
+  .sleep-page .graph-quick-facts strong{font-size:12px}
+  .sleep-page .metrics-grid .metric-card{padding:10px 15px 11px 64px;min-height:101px}
+  .sleep-page .metrics-grid .metric-card .metric-illustration{width:51px;height:67px;left:6px}
+  .sleep-page .metrics-grid .metric-card strong{font-size:13.5px}
+  .sleep-page .metrics-grid .metric-card .metric-hint{font-size:9px}
+  .sleep-page .insight{grid-template-columns:minmax(0,1fr) 76px}
+  .sleep-page .insight-mascot{width:78px}
+  .sleep-page .insight p{font-size:11px}
+}
+@media (prefers-reduced-motion: reduce){.sleep-page-scene{background-attachment:initial}}
+/* 実フォントの390px確認: 画像を少し狭め、時間表示の幅を確保する。 */
+@media(min-width:381px) and (max-width:400px){
+  .sleep-page .metrics-grid .metric-card{padding-left:82px}
+  .sleep-page .metrics-grid .metric-card .metric-illustration{width:62px}
+}
+/* 元画像は保持。円形clipに月全体が入るよう、風景slotだけを調整する。 */
+.sleep-page .sleep-hero .hero-art-night{width:110%;height:110%;left:-10%;top:0;max-width:none}
