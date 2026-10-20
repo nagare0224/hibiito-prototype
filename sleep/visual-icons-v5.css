@@ -1,0 +1,27 @@
+/* HIBIITO Sleep icon-only trial v5. Noncanonical, dummy-only.
+   Keep card surfaces, live values, and compare interactions unchanged.
+   Four standalone transparent SVG motifs; no illustrated tile backing. */
+.sleep-page .metrics-grid .metric-card { padding-left: 72px; }
+.sleep-page .metrics-grid .metric-card .metric-illustration {
+  position:absolute; top:50%; left:10px; right:auto; transform:translateY(-50%);
+  width:54px; height:54px; max-width:54px;
+  border:0; border-radius:0; box-shadow:none;
+  background-color:transparent; background-position:center;
+  background-repeat:no-repeat; background-size:contain;
+  filter:drop-shadow(0 2px 2px rgba(64,93,92,.08)); opacity:1;
+}
+.sleep-page .metrics-grid .metric-card:nth-child(1) .metric-illustration { background-image:url('../assets/sleep-icon-bedtime-v5.svg'); }
+.sleep-page .metrics-grid .metric-card:nth-child(2) .metric-illustration { background-image:url('../assets/sleep-icon-wakeup-v5.svg'); }
+.sleep-page .metrics-grid .metric-card:nth-child(3) .metric-illustration { background-image:url('../assets/sleep-icon-deep-v5.svg'); }
+.sleep-page .metrics-grid .metric-card:nth-child(4) .metric-illustration { background-image:url('../assets/sleep-icon-rem-v5.svg'); }
+html[data-theme='night'] .sleep-page .metrics-grid .metric-card .metric-illustration {
+  filter:drop-shadow(0 2px 4px rgba(3,12,30,.23));
+}
+@media(max-width:380px) {
+ .sleep-page .metrics-grid .metric-card { padding-left:62px; }
+ .sleep-page .metrics-grid .metric-card .metric-illustration { left:6px; width:48px; height:48px; max-width:48px; }
+}
+@media(max-width:350px) {
+ .sleep-page .metrics-grid .metric-card { padding-left:56px; }
+ .sleep-page .metrics-grid .metric-card .metric-illustration { left:6px; width:43px; height:43px; max-width:43px; }
+}
