@@ -1,0 +1,113 @@
+/* HIBIITO Sleep Visual Prototype v4 — noncanonical / dummy-only.
+ * Load after visual-asset-v3.css. Preserve live text, chart SVG and gestures.
+ */
+/* Mobile browser toolbars can resize the visual viewport while scrolling.
+   Anchor the painted background to the document, not the viewport. */
+body.sleep-page { position: relative; isolation: isolate; }
+.sleep-page .sleep-page-scene {
+  position: absolute; inset: 0; width: 100%; height: auto; z-index: 0;
+  background-color: #f5f5ed;
+  background-image:
+    linear-gradient(to bottom, rgba(251,251,244,.06) 0%, rgba(249,249,241,.16) 24%, rgba(246,246,239,.74) 44%, #f5f5ed 74%),
+    url('../assets/sleep-page-day.webp');
+  background-position: center top, center top;
+  background-size: 100% 100%, 100% auto;
+  background-repeat: no-repeat;
+  opacity: .84;
+  pointer-events: none;
+}
+html[data-theme='night'] .sleep-page .sleep-page-scene {
+  background-color: #10223b;
+  background-image:
+    linear-gradient(to bottom, rgba(9,24,43,.47) 0%, rgba(10,26,46,.55) 28%, rgba(13,31,52,.83) 51%, #10223b 76%),
+    url('../assets/sleep-page-night.webp');
+  background-position: center top, center -115px;
+  background-size: 100% 100%, 100% auto;
+  opacity: .77;
+}
+/* Calmer surfaces and more legible stage labels / timeline guides. */
+.sleep-page .section-block.sleep-graph {
+  background: rgba(255,255,252,.975);
+  box-shadow: 0 6px 18px rgba(40,75,65,.07);
+}
+html[data-theme='night'] .sleep-page .section-block.sleep-graph {
+  background: rgba(19,40,67,.975);
+  border-color: rgba(116,148,178,.53);
+}
+.sleep-page .timeline-lanes, .sleep-page .time-axis, .sleep-page .stage-key {
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.sleep-page .timeline-lanes { font-weight: 500; }
+.sleep-page .timeline-visual {
+  border-color: color-mix(in srgb, var(--line) 62%, transparent);
+}
+.sleep-page .time-axis { margin-top: 3px; }
+.sleep-page .stage-key { margin-top: 8px; }
+.sleep-page .stage-key i { width: 10px; height: 10px; }
+.sleep-page .graph-selection { font-size: 11.5px; }
+/* Compact square illustrated icons; keep live text and compare buttons. */
+.sleep-page .metrics-grid .metric-card {
+  min-height: 108px;
+  padding: 13px 11px 12px 72px;
+  gap: 4px;
+  border-radius: 21px;
+  background: rgba(255,255,253,.97);
+}
+html[data-theme='night'] .sleep-page .metrics-grid .metric-card {
+  background: rgba(22,45,73,.97);
+}
+.sleep-page .metrics-grid .metric-card .metric-illustration {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  max-width: 52px;
+  border-radius: 15px;
+  background-position: center;
+  background-size: cover;
+  border: 1px solid color-mix(in srgb, var(--line) 60%, transparent);
+  box-shadow: 0 1px 5px rgba(33,68,61,.10);
+}
+.sleep-page .metrics-grid .metric-card strong {
+  font-size: 16.5px;
+  letter-spacing: -.035em;
+}
+.sleep-page .metrics-grid .metric-card .metric-hint { font-size: 10.5px; }
+.sleep-page .metrics-grid .metric-card::before {
+  width: 23px; height: 23px; top: 9px; right: 7px;
+}
+/* Give note copy more room without dropping or re-generating the mascot. */
+.sleep-page .insight {
+  grid-template-columns: minmax(0,1fr) 93px;
+  min-height: 126px;
+  gap: 2px;
+  padding: 14px 9px 14px 16px;
+  background: rgba(255,255,252,.975);
+}
+html[data-theme='night'] .sleep-page .insight {
+  background: rgba(21,43,72,.975);
+}
+.sleep-page .insight-mascot { width: 95px; max-height: 118px; align-self: end; }
+.sleep-page .insight p { font-size: 12px; line-height: 1.7; }
+/* 320–380 CSS px: fit long Japanese duration labels. */
+@media (max-width: 380px) {
+  .sleep-page .metrics-grid .metric-card { padding: 11px 8px 11px 63px; min-height: 102px; }
+  .sleep-page .metrics-grid .metric-card .metric-illustration { left: 7px; width: 47px; height: 47px; max-width: 47px; }
+  .sleep-page .metrics-grid .metric-card strong { font-size: 14.5px; }
+  .sleep-page .metrics-grid .metric-card .metric-hint { font-size: 10px; }
+  .sleep-page .insight { grid-template-columns: minmax(0,1fr) 82px; padding-left: 12px; }
+  .sleep-page .insight-mascot { width: 83px; }
+}
+@media (max-width: 350px) {
+  .sleep-page .metrics-grid .metric-card { padding: 10px 6px 10px 56px; min-height: 98px; }
+  .sleep-page .metrics-grid .metric-card .metric-illustration { left: 6px; width: 43px; height: 43px; max-width: 43px; }
+  .sleep-page .metrics-grid .metric-card strong { font-size: 13px; }
+  .sleep-page .metrics-grid .metric-card .metric-hint { font-size: 9px; }
+  .sleep-page .timeline-lanes, .sleep-page .time-axis, .sleep-page .stage-key { font-size: 10.5px; }
+  .sleep-page .insight { grid-template-columns: minmax(0,1fr) 72px; }
+  .sleep-page .insight-mascot { width: 75px; }
+  .sleep-page .insight p { font-size: 11px; }
+}
