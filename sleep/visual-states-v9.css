@@ -122,3 +122,9 @@ html[data-theme='night'] .sleep-page .state-panel .sleep-state-loading span{
 @media(prefers-reduced-motion:reduce) {
   .sleep-page .state-panel .sleep-state-loading span {animation:none;}
 }
+/* Explicit author-level visibility because display:grid/flex on sibling sections
+ * otherwise takes precedence over the browser's UA [hidden] style. */
+.sleep-page .sleep-screen > .sleep-hero[hidden],
+.sleep-page .sleep-screen > .section-block[hidden],
+.sleep-page .sleep-screen > .metrics-grid[hidden],
+.sleep-page .sleep-screen > .insight[hidden] {display:none!important;}
