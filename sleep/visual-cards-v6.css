@@ -1,0 +1,79 @@
+/* Sleep v6 — compact watercolor icon cards. Noncanonical visual prototype.
+ * Do not modify the hero illustration, chart semantics or sheet interactions. */
+.sleep-page .metrics-grid { gap: 10px; }
+.sleep-page .metrics-grid .metric-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-width: 0;
+  min-height: 109px;
+  padding: 13px 12px 11px 13px;
+  gap: 4px;
+  text-align: left;
+  background: rgba(255,255,253,.975);
+}
+html[data-theme="night"] .sleep-page .metrics-grid .metric-card {
+  background: rgba(22,45,73,.975);
+}
+.sleep-page .metrics-grid .metric-card::before { content: none; }
+.sleep-page .metrics-grid .metric-card::after { opacity: .19; }
+html[data-theme="night"] .sleep-page .metrics-grid .metric-card::after { opacity: .11; }
+.sleep-page .metrics-grid .metric-card > span:not(.metric-illustration):not(.metric-hint) {
+  font-size: 12px;
+  font-weight: 500;
+  max-width: calc(100% - 40px);
+  color: var(--ink);
+}
+.sleep-page .metrics-grid .metric-card strong {
+  margin: 2px 0 0;
+  font-size: clamp(15px,4.1vw,18px);
+  font-weight: 700;
+  line-height: 1.25;
+  white-space: nowrap;
+  letter-spacing: -.035em;
+  font-variant-numeric: tabular-nums;
+}
+.sleep-page .metrics-grid .metric-card .metric-hint {
+  margin-top: auto;
+  padding-top: 6px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.sleep-page .metrics-grid .metric-card .metric-illustration {
+  position: absolute;
+  left: auto;
+  right: 11px;
+  top: 11px;
+  transform: none;
+  width: 39px;
+  height: 39px;
+  max-width: 39px;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  box-shadow: none;
+  filter: none;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+.sleep-page .metrics-grid .metric-card:nth-child(1) .metric-illustration { background-image: url('../assets/sleep-icon-bedtime-v6.svg'); }
+.sleep-page .metrics-grid .metric-card:nth-child(2) .metric-illustration { background-image: url('../assets/sleep-icon-wakeup-v6.svg'); }
+.sleep-page .metrics-grid .metric-card:nth-child(3) .metric-illustration { background-image: url('../assets/sleep-icon-deep-v6.svg'); }
+.sleep-page .metrics-grid .metric-card:nth-child(4) .metric-illustration { background-image: url('../assets/sleep-icon-rem-v6.svg'); }
+html[data-theme="night"] .sleep-page .metrics-grid .metric-card .metric-illustration {
+  filter: brightness(1.04) saturate(.88);
+}
+@media(max-width:380px) {
+  .sleep-page .metrics-grid .metric-card { min-height: 103px; padding: 11px 8px 10px 10px; }
+  .sleep-page .metrics-grid .metric-card .metric-illustration { width: 34px; height: 34px; max-width: 34px; right: 7px; top: 10px; }
+  .sleep-page .metrics-grid .metric-card > span:not(.metric-illustration):not(.metric-hint) { font-size: 11px; }
+  .sleep-page .metrics-grid .metric-card strong { font-size: clamp(13px,4.1vw,15.5px); }
+  .sleep-page .metrics-grid .metric-card .metric-hint { font-size: 10px; }
+}
+@media(max-width:350px) {
+  .sleep-page .metrics-grid .metric-card strong { font-size: 13px; }
+  .sleep-page .metrics-grid .metric-card .metric-illustration { width: 30px; height: 30px; max-width: 30px; right: 6px; }
+  .sleep-page .metrics-grid .metric-card .metric-hint { font-size: 9px; }
+}
