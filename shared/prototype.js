@@ -53,6 +53,21 @@
     rem:{label:'REM睡眠',current:'1時間16分',average:'1時間24分',range:'1時間10分〜1時間35分',status:'いつもの範囲内',summary:'最近30日平均より8分短めですが、いつもの範囲内です。',value:76,min:70,max:95},
     awake:{label:'覚醒時間',current:'42分',average:'28分',range:'15〜35分',status:'いつもより長め',summary:'最近30日平均より14分長めです。一晩だけで良し悪しを決めず、数日間の流れを見てみましょう。',value:42,min:15,max:35}
   };
+  const comparePresentation = {
+    total: {averageValue:420, minLabel:'6:30', averageLabel:'7:00', maxLabel:'7:30', summary:'30日平均より18分短めです。'},
+    bedtime: {averageValue:1416, minLabel:'23:10', averageLabel:'23:36', maxLabel:'00:10', summary:'30日平均より12分遅めです。'},
+    wakeup: {averageValue:424, minLabel:'06:30', averageLabel:'07:04', maxLabel:'07:30', summary:'30日平均より8分遅めです。'},
+    deep: {averageValue:75, minLabel:'1:05', averageLabel:'1:15', maxLabel:'1:45', summary:'30日平均より6分長めです。'},
+    rem: {averageValue:84, minLabel:'1:10', averageLabel:'1:24', maxLabel:'1:35', summary:'30日平均より8分短めです。'},
+    awake: {averageValue:28, minLabel:'15分', averageLabel:'28分', maxLabel:'35分', summary:'30日平均より14分長めです。'}
+  };
+  // Visual-only reference chart. The soft band represents min..max, not a
+  // measured probability distribution; clock times may cross midnight.
+  const chartX=(value,min,max)=>{
+    const fraction=(value-min)/(max-min);
+    return Math.min(94,Math.max(6,20+60*fraction));
+  };
+
   const backdrop=document.getElementById('compare-backdrop');
   const sheet=document.getElementById('compare-sheet');
   const dragHandle=document.getElementById('compare-handle');
@@ -106,10 +121,16 @@
     document.getElementById('compare-average').textContent=data.average;
     document.getElementById('compare-range').textContent=data.range;
     document.getElementById('compare-status').textContent=data.status;
-    document.getElementById('compare-summary').textContent=data.summary;
-    const fraction=(data.value-data.min)/(data.max-data.min);
-    const marker=20+60*fraction;
-    document.getElementById('compare-marker').style.left=Math.min(95,Math.max(5,marker))+'%';
+    const view=comparePresentation[key];
+    document.getElementById('compare-summary').textContent=view.summary;
+    document.getElementById('compare-min-short').textContent=view.minLabel;
+    document.getElementById('compare-avg-short').textContent=view.averageLabel;
+    document.getElementById('compare-max-short').textContent=view.maxLabel;
+    document.getElementById('compare-marker').style.left=chartX(data.value,data.min,data.max)+'%';
+    document.getElementById('compare-average-marker').style.left=chartX(view.averageValue,data.min,data.max)+'%';
+    document.getElementById('compare-status').classList.toggle('is-outside',data.value<data.min || data.value>data.max);
+    document.getElementById('compare-plot').setAttribute('aria-label',
+      data.label+'：今回'+data.current+'。最近30日平均'+data.average+'。いつもの範囲'+data.range+'。');
     sheet.classList.remove('is-dragging','is-dismissing');
     backdrop.classList.remove('is-dragging');
     sheet.style.removeProperty('--sheet-offset');

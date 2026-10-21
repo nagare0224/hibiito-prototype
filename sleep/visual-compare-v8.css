@@ -1,0 +1,108 @@
+/* Sleep comparison-sheet v8 · C option refined / noncanonical dummy-data prototype.
+   Light reference band; NOT an observed density or editable range slider. */
+.sleep-page .comparison-sheet {
+  width:min(100%,430px);
+  padding: 16px 18px max(22px, env(safe-area-inset-bottom));
+  border-radius:30px 30px 0 0;
+  background:linear-gradient(165deg,#fbfaf2 0%,#f6f8f1 70%,#f2f6f0 100%);
+  color:#254947;
+}
+html[data-theme="night"] .sleep-page .comparison-sheet {
+  background:linear-gradient(165deg,#1c354d 0%,#142b45 85%,#122940 100%);
+  color:#eaf2f4;
+  border-color:#476176;
+}
+.sleep-page .comparison-sheet .sheet-drag-handle{ margin-bottom:7px; }
+.sleep-page .comparison-sheet .sheet-heading {margin-bottom:9px; opacity:.85;}
+.sleep-page .comparison-sheet .sheet-eyebrow {font-size:10px;letter-spacing:.01em;}
+.sleep-page .comparison-sheet .sheet-dismiss-hint {font-size:10px;}
+.sleep-page .comparison-sheet h2 {
+  margin:0 0 12px;
+  font-family:"Kiwi Maru","Zen Maru Gothic",sans-serif;
+  font-size:20px;
+  font-weight:500;
+  letter-spacing:.005em;
+}
+.sleep-page .comparison-sheet .sheet-current{ margin-bottom:12px; align-items:end; gap:5px;}
+.sleep-page .comparison-sheet .sheet-current>div>span{font-size:11px; color:var(--muted);}
+.sleep-page .comparison-sheet .sheet-current strong {
+  font-family:"Kiwi Maru", "Zen Maru Gothic", sans-serif;
+  font-size:clamp(25px,7vw,30px);font-weight:500;letter-spacing:-.04em;line-height:1.32;
+}
+.sleep-page .comparison-sheet .sheet-status{
+  background:#eaf4ee;border:1px solid #dcebe0;color:#477e72;
+  padding:6px 9px;font-size:10px;font-weight:500;margin-bottom:4px;
+}
+.sleep-page .comparison-sheet .sheet-status.is-outside{
+  background:#f7f1e7;border-color:#ebdfca;color:#8b7451;
+}
+html[data-theme="night"] .sleep-page .comparison-sheet .sheet-status{
+  background:#2b4959;border-color:#3a6570;color:#c2e5de;
+}
+html[data-theme="night"] .sleep-page .comparison-sheet .sheet-status.is-outside{
+  background:#4a4045;border-color:#68565c;color:#f1d6bc;
+}
+.sleep-page .sheet-v8-plot{padding:4px 2px 11px;margin-bottom:9px;}
+.sleep-page .sheet-v8-plot-title{font-size:11px;color:var(--muted);margin:0 0 5px;letter-spacing:.01em;}
+.sleep-page .sheet-v8-plot-area{height:65px;position:relative;isolation:isolate;}
+.sleep-page .sheet-v8-range-track{
+  position:absolute;bottom:13px;left:5%;width:90%;height:4px;border-radius:999px;
+  background:#d8e8e5;
+}
+.sleep-page .sheet-v8-range-band{
+  position:absolute;left:20%;width:60%;bottom:11px;height:23px;border-radius:65% 65% 5px 5px / 95% 95% 5px 5px;
+  background:linear-gradient(180deg,rgba(154,207,210,.19),rgba(141,202,201,.40));
+  border-bottom:4px solid rgba(114,188,182,.46);
+  pointer-events:none;
+}
+.sleep-page .sheet-v8-average-marker{
+  position:absolute;bottom:10px;width:1px;height:31px;
+  border-left:1px dashed rgba(107,152,157,.65);transform:translateX(-50%);
+}
+.sleep-page .sheet-v8-current-marker{
+  position:absolute;bottom:9px;width:13px;height:13px;border-radius:50%;
+  transform:translateX(-50%);
+  background:#6ba9a7;border:3px solid #f7fbf8;
+  box-shadow:0 0 0 1px #81b8b3;
+}
+.sleep-page .sheet-v8-current-marker span{
+  position:absolute;white-space:nowrap;bottom:16px;left:50%;transform:translateX(-50%);
+  font-family:"Zen Maru Gothic",sans-serif;font-size:10px;font-weight:500;
+  color:#4c8985;background:rgba(247,251,248,.9);padding:2px 6px;border-radius:10px;
+}
+.sleep-page .sheet-v8-axis {display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;margin:0 2px;}
+.sleep-page .sheet-v8-axis>div{display:grid;gap:2px;text-align:center;font-variant-numeric:tabular-nums;}
+.sleep-page .sheet-v8-axis>div:first-child{text-align:left;}
+.sleep-page .sheet-v8-axis>div:last-child{text-align:right;}
+.sleep-page .sheet-v8-axis span{font-size:11px;font-weight:500;}
+.sleep-page .sheet-v8-axis small{font-size:9px;color:var(--muted);}
+.sleep-page .comparison-sheet .sheet-v8-stats{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px;
+}
+.sleep-page .comparison-sheet .sheet-v8-stats>div{
+  padding:10px 10px 9px;gap:5px;
+  background:rgba(255,255,255,.51);border-color:rgba(149,178,166,.26);
+}
+.sleep-page .comparison-sheet .sheet-v8-stats span{font-size:10px;color:var(--muted);}
+.sleep-page .comparison-sheet .sheet-v8-stats strong{font-size:12px;font-weight:500;}
+.sleep-page .comparison-sheet .sheet-summary{
+  font-size:12.5px;line-height:1.55;font-weight:500;
+  margin:8px 0 7px;
+}
+.sleep-page .comparison-sheet .sheet-disclaimer{font-size:9px;line-height:1.45;color:var(--muted);opacity:.84;}
+html[data-theme="night"] .sleep-page .sheet-v8-range-track{background:#3e6672;}
+html[data-theme="night"] .sleep-page .sheet-v8-range-band{
+  background:linear-gradient(180deg,rgba(146,185,210,.12),rgba(136,186,199,.32));
+  border-bottom-color:rgba(149,204,210,.58);
+}
+html[data-theme="night"] .sleep-page .sheet-v8-average-marker{border-left-color:#8ca7b4;}
+html[data-theme="night"] .sleep-page .sheet-v8-current-marker{background:#8ed0ce;border-color:#20384c;box-shadow:0 0 0 1px #a6d9d8;}
+html[data-theme="night"] .sleep-page .sheet-v8-current-marker span{background:#234354;color:#b9e4df;}
+html[data-theme="night"] .sleep-page .sheet-v8-stats>div{background:rgba(40,68,86,.59);border-color:rgba(140,178,197,.23);}
+@media(max-width:350px){
+ .sleep-page .comparison-sheet {padding-left:12px;padding-right:12px;}
+ .sleep-page .comparison-sheet .sheet-current strong{font-size:24px;}
+ .sleep-page .comparison-sheet .sheet-status{font-size:9px;padding:5px 7px;}
+ .sleep-page .comparison-sheet .sheet-v8-stats>div{padding:8px 7px;}
+ .sleep-page .comparison-sheet .sheet-v8-stats strong{font-size:10px;}
+}

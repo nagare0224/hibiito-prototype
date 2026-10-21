@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="./visual-icons-v5.css?v=20261021-icons5" />
   <link rel="stylesheet" href="./visual-cards-v6.css?v=20261021-cards6" />
   <link rel="stylesheet" href="./visual-graph-v7.css?v=20261021-graph7" />
+  <link rel="stylesheet" href="./visual-compare-v8.css?v=20261022-compare8" />
 </head>
 <body class="sleep-page">
   <div class="sleep-page-scene" aria-hidden="true"></div>
@@ -92,17 +93,33 @@
     </button>
     <div class="sheet-heading">
       <span class="sheet-eyebrow">いつもの自分と比べる</span>
-      <span class="sheet-dismiss-hint">下にスワイプで閉じる</span>
+      <span class="sheet-dismiss-hint">下へスワイプで閉じる</span>
     </div>
     <h2 id="compare-title">睡眠時間</h2>
-    <div class="sheet-current"><div><span>今回</span><strong id="compare-current">6時間42分</strong></div><span id="compare-status" class="sheet-status">いつもの範囲内</span></div>
-    <div class="sheet-stats">
-      <div><span>最近30日平均（デモ）</span><strong id="compare-average">7時間00分</strong></div>
-      <div><span>いつもの範囲（デモ）</span><strong id="compare-range">6時間30分〜7時間30分</strong></div>
+    <div class="sheet-current">
+      <div><span>今回の睡眠</span><strong id="compare-current">6時間42分</strong></div>
+      <span id="compare-status" class="sheet-status">いつもの範囲内</span>
     </div>
-    <div class="sheet-scale" aria-hidden="true"><span class="sheet-range-band"></span><span id="compare-marker" class="sheet-marker"></span></div>
-    <p class="sheet-summary" id="compare-summary">最近30日平均より18分短いですが、いつもの範囲内です。</p>
-    <p class="sheet-disclaimer">この比較はデザイン確認用の仮データです。医学的な正常・異常の判定ではありません。</p>
+    <div class="sheet-v8-plot">
+      <div class="sheet-v8-plot-title">いつもの範囲と今回の位置</div>
+      <div id="compare-plot" class="sheet-v8-plot-area" role="img" aria-label="今回の位置と最近30日の平均、いつもの範囲を比較">
+        <div class="sheet-v8-range-track" aria-hidden="true"></div>
+        <div class="sheet-v8-range-band" aria-hidden="true"></div>
+        <div id="compare-average-marker" class="sheet-v8-average-marker" aria-hidden="true"></div>
+        <div id="compare-marker" class="sheet-v8-current-marker" aria-hidden="true"><span>今回</span></div>
+      </div>
+      <div class="sheet-v8-axis" aria-hidden="true">
+        <div><span id="compare-min-short">6:30</span><small>下限</small></div>
+        <div><span id="compare-avg-short">7:00</span><small>30日平均</small></div>
+        <div><span id="compare-max-short">7:30</span><small>上限</small></div>
+      </div>
+    </div>
+    <div class="sheet-stats sheet-v8-stats">
+      <div><span>最近30日平均</span><strong id="compare-average">7時間00分</strong></div>
+      <div><span>いつもの範囲</span><strong id="compare-range">6時間30分〜7時間30分</strong></div>
+    </div>
+    <p class="sheet-summary" id="compare-summary">30日平均より18分短めです。</p>
+    <p class="sheet-disclaimer">※ デモデータによる比較です。健康状態を判定するものではありません。</p>
   </section>
 
   <aside class="debug-panel">
@@ -112,7 +129,7 @@
     <span id="art-readout">hero art: checking…</span>
     <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
     <span>dummy data only</span>
-    <span id="prototype-version">version: 2026-10-21 visual-graph-v7</span>
+    <span id="prototype-version">version: 2026-10-22 compare-c-v8</span>
   </aside>
 
   <script src="../shared/prototype.js?v=20261020-calm2"></script>
