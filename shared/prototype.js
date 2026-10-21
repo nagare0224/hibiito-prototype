@@ -204,25 +204,73 @@
     requestAnimationFrame(checkOverflow);
   });
 
-  stateBtn.addEventListener('click',()=>{
-    state=(state+1)%4;
-    const labels=['Normal','Missing','Loading','Unsupported'];
-    stateBtn.textContent=labels[state];
-    const messages=[
-      ['', ''],
-      ['データなし','昨夜の睡眠データは見つかりませんでした。0時間としては扱いません。'],
-      ['読み込み中','保存済みデータがないため、睡眠データを取得しています。'],
-      ['現在取得できません','この指標は現在取得できません。対応状況を確認してください。']
-    ];
+  // Visual-only noncanonical state scenarios. No real sleep records or fetches.
+  const stateVariants=[
+    null,
+    {label:'Loading',key:'loading',overline:'昨夜の睡眠',
+      title:'睡眠の記録を確認しています',
+      message:'昨夜の睡眠データを読み込んでいます。',
+      note:'確認中は睡眠時間を表示しません。',
+      art:'../assets/sleep-icon-rem-v6.svg'},
+    {label:'Missing',key:'missing',overline:'昨夜の睡眠',
+      title:'記録が見つかりません',
+      message:'昨夜の睡眠データは見つかりませんでした。睡眠時間が0時間という意味ではありません。',
+      note:'記録があとから反映される場合もあります。',
+      art:'../assets/sleep-icon-deep-v6.svg'},
+    {label:'Unsupported',key:'unsupported',overline:'睡眠データについて',
+      title:'詳しい記録を表示できません',
+      message:'現在、この画面で睡眠段階の詳細を表示できません。',
+      note:'取得元によって、利用できるデータが異なる場合があります。',
+      art:'../assets/sleep-icon-wakeup-v6.svg'},
+    {label:'Error',key:'error',overline:'睡眠データについて',
+      title:'うまく読み込めませんでした',
+      message:'睡眠データの取得に失敗しました。通信状態などを確認して、もう一度お試しください。',
+      note:'この再試行はデモです。成功するとサンプル表示に戻ります。',
+      art:'../assets/sleep-icon-bedtime-v6.svg'}
+  ];
+  const stateIllustration=document.getElementById('state-illustration');
+  const stateNote=document.getElementById('state-note');
+  const stateOverline=document.getElementById('state-overline');
+  const stateSkeleton=document.getElementById('state-loading-skeleton');
+  const stateRetry=document.querySelector('[data-action="retry-sleep"]');
+  let stateRetryTimer=null;
+  const showState=(nextState)=>{
+    state=nextState;
+    const variant=stateVariants[state];
     const normal=state===0;
-    if(!normal)closeComparison();
+    stateBtn.textContent=normal?'Normal':variant.label;
+    if(!normal)closeComparison(true);
     mainSections.forEach(el=>el.hidden=!normal);
     statePanel.hidden=normal;
     if(!normal){
-      document.getElementById('state-title').textContent=messages[state][0];
-      document.getElementById('state-message').textContent=messages[state][1];
+      statePanel.dataset.state=variant.key;
+      statePanel.setAttribute('aria-busy',variant.key==='loading'?'true':'false');
+      document.getElementById('state-title').textContent=variant.title;
+      document.getElementById('state-message').textContent=variant.message;
+      stateOverline.textContent=variant.overline;
+      stateNote.textContent=variant.note;
+      stateIllustration.src=variant.art;
+      stateSkeleton.hidden=variant.key!=='loading';
+      stateRetry.hidden=variant.key!=='error';
+    } else {
+      statePanel.setAttribute('aria-busy','false');
     }
     requestAnimationFrame(checkOverflow);
+  };
+  stateBtn.addEventListener('click',()=>{
+    clearTimeout(stateRetryTimer);
+    stateRetryTimer=null;
+    showState((state+1)%stateVariants.length);
+  });
+  // A functioning demo retry, not a live health-data network request.
+  stateRetry.addEventListener('click',()=>{
+    if(state!==4)return;
+    clearTimeout(stateRetryTimer);
+    showState(1);
+    stateRetryTimer=setTimeout(()=>{
+      stateRetryTimer=null;
+      if(state===1)showState(0);
+    },950);
   });
 
   copyBtn.addEventListener('click',()=>{

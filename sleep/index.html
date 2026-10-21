@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="./visual-cards-v6.css?v=20261021-cards6" />
   <link rel="stylesheet" href="./visual-graph-v7.css?v=20261021-graph7" />
   <link rel="stylesheet" href="./visual-compare-v8.css?v=20261022-compare8" />
+  <link rel="stylesheet" href="./visual-states-v9.css?v=20261022-states9" />
 </head>
 <body class="sleep-page">
   <div class="sleep-page-scene" aria-hidden="true"></div>
@@ -77,10 +78,20 @@
         <img class="insight-mascot" src="../assets/sleep-note-mascot.webp?v=20261021-art3" alt="" aria-hidden="true">
       </section>
 
-      <section class="state-panel" id="state-panel" hidden>
-        <div class="state-art" aria-hidden="true">☁</div>
-        <strong id="state-title">データなし</strong>
-        <p id="state-message">昨夜の睡眠データは見つかりませんでした。0時間としては扱いません。</p>
+      <section class="state-panel sleep-state-v9" id="state-panel" data-state="missing" aria-live="polite" hidden>
+        <div class="sleep-state-art-wrap" aria-hidden="true">
+          <img id="state-illustration" src="../assets/sleep-icon-deep-v6.svg" alt="">
+          <span class="sleep-state-spark sleep-state-spark-a"></span>
+          <span class="sleep-state-spark sleep-state-spark-b"></span>
+        </div>
+        <span id="state-overline" class="sleep-state-overline">昨夜の睡眠</span>
+        <h2 id="state-title">記録が見つかりません</h2>
+        <p id="state-message" class="sleep-state-description">昨夜の睡眠データは見つかりませんでした。睡眠時間が0時間という意味ではありません。</p>
+        <div id="state-loading-skeleton" class="sleep-state-loading" aria-hidden="true" hidden>
+          <span></span><span></span><span></span>
+        </div>
+        <p id="state-note" class="sleep-state-note">記録があとから反映される場合もあります。</p>
+        <button type="button" class="sleep-state-retry" data-action="retry-sleep" hidden>もう一度試す</button>
       </section>
     </section>
   </main>
@@ -129,7 +140,7 @@
     <span id="art-readout">hero art: checking…</span>
     <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
     <span>dummy data only</span>
-    <span id="prototype-version">version: 2026-10-22 compare-c-v8</span>
+    <span id="prototype-version">version: 2026-10-22 states-v9</span>
   </aside>
 
   <script src="../shared/prototype.js?v=20261020-calm2"></script>
