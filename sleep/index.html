@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="./visual-graph-v7.css?v=20261021-graph7" />
   <link rel="stylesheet" href="./visual-compare-v8.css?v=20261022-compare8" />
   <link rel="stylesheet" href="./visual-states-v9.css?v=20261022-states9" />
+  <link rel="stylesheet" href="./visual-stage-v10.css?v=20261022-stage10" />
 </head>
 <body class="sleep-page">
   <div class="sleep-page-scene" aria-hidden="true"></div>
@@ -59,7 +60,18 @@
           <div class="timeline-visual" id="timeline-a" aria-label="各睡眠段階の時間推移"></div>
         </div>
         <div class="time-axis"><span>23:48</span><span>02:00</span><span>04:00</span><span>07:12</span></div>
-        <p class="graph-selection" id="timeline-a-selected" aria-live="polite">色の帯をタップすると、その時間帯の眠りを確認できます。</p>
+        <div class="stage-popover-v10" id="stage-popover-v10" role="group" aria-label="睡眠区間の詳細" hidden>
+          <div class="stage-popover-title-row"><strong id="stage-v10-name">浅い睡眠</strong><span id="stage-v10-duration">31分</span></div>
+          <div class="stage-popover-time" id="stage-v10-times">01:17〜01:48</div>
+          <div class="stage-popover-footer">
+            <span class="stage-popover-mode" id="stage-v10-mode">選択中</span>
+            <div class="stage-popover-nav" id="stage-v10-nav">
+              <button type="button" data-stage-nav="-1" aria-label="前の睡眠区間">‹</button>
+              <button type="button" data-stage-nav="1" aria-label="次の睡眠区間">›</button>
+            </div>
+          </div>
+        </div>
+        <p class="graph-selection" id="timeline-a-selected">タップで詳細を表示・長押しで左右に確認</p>
         <div class="stage-key"><span><i class="key-deep"></i>深い</span><span><i class="key-light"></i>浅い</span><span><i class="key-rem"></i>REM</span><span><i class="key-awake"></i>覚醒</span></div>
       </section>
 
@@ -140,10 +152,11 @@
     <span id="art-readout">hero art: checking…</span>
     <span>fonts: Kiwi Maru / Zen Maru Gothic</span>
     <span>dummy data only</span>
-    <span id="prototype-version">version: 2026-10-22 states-v9</span>
+    <span id="prototype-version">version: 2026-10-22 stage-v10</span>
   </aside>
 
   <script src="../shared/prototype.js?v=20261020-calm2"></script>
   <script src="./visual-graph-v7.js?v=20261021-graph7"></script>
+  <script src="./visual-stage-v10.js?v=20261022-stage10"></script>
 </body>
 </html>

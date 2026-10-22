@@ -37,8 +37,11 @@
       const bar=el('rect',{x:x+0.5,y,width:Math.max(2,w-1),height:16,rx:3,class:'stage-segment stage-'+type,tabindex:0,role:'button'});
       const msg=clock(elapsed)+'〜'+clock(elapsed+minutes)+' '+stageLabels[type]+'（'+formatted(minutes)+'）';
       bar.setAttribute('aria-label',msg);
-      bar.addEventListener('click',()=>{selected.textContent=msg;});
-      bar.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();selected.textContent=msg;}});
+      bar.dataset.stageType=type;
+      bar.dataset.stageStart=String(elapsed);
+      bar.dataset.stageDuration=String(minutes);
+      // v10 chart gestures are attached centrally after the v7 gradients load.
+      // The interval metadata remains live and keyboard-accessible.
       svg.appendChild(bar);previous=type;elapsed+=minutes;
     }
     container.appendChild(svg);
