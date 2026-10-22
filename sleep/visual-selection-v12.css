@@ -1,0 +1,49 @@
+/* Sleep v12 — subtle stage selection and explicit SVG focus treatment.
+ * Prevent Android's default focus ring from appearing as a thick black box.
+ * Keep a visible but quiet keyboard focus indicator. */
+.sleep-page .sleep-graph .timeline-visual,
+.sleep-page .sleep-graph .timeline-visual svg,
+.sleep-page .sleep-graph rect.stage-segment {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+.sleep-page .sleep-graph rect.stage-segment,
+.sleep-page .sleep-graph rect.stage-segment:focus,
+.sleep-page .sleep-graph rect.stage-segment:focus-visible,
+.sleep-page .sleep-graph rect.stage-segment:active {
+  outline: none !important;
+  outline-offset: 0;
+}
+/* Fixed selection: a thin sea-glass edge, with nearly imperceptible bloom. */
+.sleep-page .sleep-graph rect.stage-segment.stage-v10-fixed {
+  stroke: rgba(76, 145, 139, .90);
+  stroke-width: 1.1;
+  filter: drop-shadow(0 0 1.2px rgba(96, 171, 158, .24));
+}
+/* Temporary scrub uses a lighter tone; no dark selection halo. */
+.sleep-page .sleep-graph rect.stage-segment.stage-v10-preview {
+  stroke: rgba(117, 180, 170, .93);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 0 1.3px rgba(114, 190, 172, .21));
+}
+/* Touch focus without selection gets no frame. Keyboard focus remains visible. */
+.sleep-page .sleep-graph rect.stage-segment:focus-visible:not(.stage-v10-fixed):not(.stage-v10-preview) {
+  stroke: rgba(85, 150, 146, .95);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 1.2px rgba(109, 175, 164, .31));
+}
+html[data-theme="night"] .sleep-page .sleep-graph rect.stage-segment.stage-v10-fixed {
+  stroke: rgba(162, 215, 211, .96);
+  stroke-width: 1.1;
+  filter: drop-shadow(0 0 1.3px rgba(139, 206, 207, .25));
+}
+html[data-theme="night"] .sleep-page .sleep-graph rect.stage-segment.stage-v10-preview {
+  stroke: rgba(188, 223, 220, .96);
+  stroke-width: 1.2;
+  filter: drop-shadow(0 0 1.4px rgba(144, 202, 212, .22));
+}
+html[data-theme="night"] .sleep-page .sleep-graph rect.stage-segment:focus-visible:not(.stage-v10-fixed):not(.stage-v10-preview) {
+  stroke: rgba(184, 228, 222, .96);
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 1.4px rgba(145, 201, 208, .28));
+}
